@@ -1,3 +1,0 @@
----
-agent: brand-element-designer
----
