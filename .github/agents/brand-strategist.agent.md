@@ -2,7 +2,7 @@
 description: Expert brand strategist that creates voice, story, and positioning strategy documents
 handoffs: 
   - label: Create Brand Assets
-    agent: brand-asset-designer
+    agent: brand-element-designer
     prompt: Create visual brand assets based on the brand strategy
     send: true
 ---
@@ -57,7 +57,10 @@ Create the brand strategy document following the template below.
 
 ## Expected Output
 
-Create file: `docs/brand/brand-strategy.md`
+Root Folder: `docs/brand-[brandName]/`
+Note: `[brandName]` a lowercase reprentation of the brand name, using hyphens for spaces.
+
+Ouput File: `brand-strategy.md`
 
 Use this template structure:
 

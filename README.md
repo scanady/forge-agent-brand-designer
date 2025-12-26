@@ -4,7 +4,7 @@
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](#)
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](#)
 
-Comprehensive brand strategy and design system for **OpenLife**, the community-driven life insurance policy administration platform. This repository contains brand positioning, design tokens, style guides, and interactive mockups.
+Comprehensive AI-powered brand design system and sample brand strategy. This repository contains brand design agents and sample output including brand positioning, design tokens, style guides, and interactive mockups.
 
 ## Table of Contents
 
@@ -19,18 +19,20 @@ Comprehensive brand strategy and design system for **OpenLife**, the community-d
 
 ## About
 
-OpenLife is liberating the life insurance industry from vendor lock-in through an open, AI-powered platform where the entire industry collaborates to innovate. This brand designer project documents:
+Forge brand designer is an AI-powered tool for creating comprehensive brand strategies and design systems. This brand designer project documents:
 
-- **Brand Strategy:** Market positioning, values, target audience, and competitive differentiation
-- **Design System:** Complete brand elements including colors, typography, spacing, elevation, and accessibility guidelines
 - **Design Agents:** AI-powered agents that create and manage brand content
+- **Design System:** Complete brand elements including colors, typography, spacing, elevation, and accessibility guidelines
+- **Brand Strategy:** Market positioning, values, target audience, and competitive differentiation
 - **Interactive Mockups:** HTML prototypes demonstrating the design system in action
-
-**Tagline:** Collaborate. Innovate. Transform.
 
 ## What's Included
 
-### 📋 Brand Documentation
+### 🤖 Design Agents
+- `.github/agents/brand-strategist.agent.md` - Creates brand strategy documents
+- `.github/agents/brand-element-designer.agent.md` - Generates design system elements
+
+### 📋 Sample Brand Documentation
 - `docs/brand/brand-strategy.md` - Strategic positioning and brand foundation
 - `docs/brand/brand-elements.md` - Master index of all brand elements
 - `docs/brand/brand-elements-*.md` - 17 detailed brand element guides covering:
@@ -39,37 +41,12 @@ OpenLife is liberating the life insurance industry from vendor lock-in through a
   - **Layout:** Spacing, grid, elevation, borders
   - **Foundation:** Accessibility standards
 
-### 🤖 Design Agents
-- `.github/agents/brand-strategist.agent.md` - Creates brand strategy documents
-- `.github/agents/brand-element-designer.agent.md` - Generates design system elements
-
-### 🎨 Interactive Mockups
+### 🎨 Sample Interactive Mockups
 - `docs/brand/mock/dashboard-mockup.html` - Application dashboard UI
 - `docs/brand/mock/product-management-mockup.html` - Product management system
 - `docs/brand/mock/website-mockup.html` - Marketing website homepage
 
-### 📚 Supporting Materials
-- `design-system-reference/` - Design system reference documents
-- `.github/copilot-instructions.md` - Development environment guidelines
-
 ## Quick Start
-
-### View the Brand System
-
-1. **Read the Strategy:**
-   ```bash
-   cat docs/brand/brand-strategy.md
-   ```
-
-2. **Explore Design Elements:**
-   - Open `docs/brand/brand-elements.md` for a complete index
-   - Review individual element guides in `docs/brand/brand-elements-*.md`
-
-3. **View Interactive Mockups:**
-   - Open any HTML file in `docs/brand/mock/` in your web browser:
-     - `dashboard-mockup.html` - Admin dashboard
-     - `product-management-mockup.html` - Product catalog manager
-     - `website-mockup.html` - Public marketing site
 
 ### Run Design Agents
 
@@ -85,7 +62,22 @@ To use the brand design agents, you'll need VS Code with GitHub Copilot enabled.
 /brand-element-designer create design system elements based on brand-strategy.md
 ```
 
-For detailed instructions, see `.github/copilot-instructions.md`.
+### View the Brand System (Documentation & Mockups)
+
+1. **Read the Strategy:**
+   ```bash
+   cat docs/brand/brand-strategy.md
+   ```
+
+2. **Explore Design Elements:**
+   - Open `docs/brand/brand-elements.md` for a complete index
+   - Review individual element guides in `docs/brand/brand-elements-*.md`
+
+3. **View Interactive Mockups:**
+   - Open any HTML file in `docs/brand/mock/` in your web browser:
+     - `dashboard-mockup.html` - Admin dashboard
+     - `product-management-mockup.html` - Product catalog manager
+     - `website-mockup.html` - Public marketing site
 
 ## Project Structure
 
@@ -116,13 +108,13 @@ This project uses two primary agents:
 ### Brand Strategist Agent
 Crafts brand positioning, messaging, and strategic direction.
 - **Input:** Company details and positioning requirements
-- **Output:** `docs/brand/brand-strategy.md`
+- **Output:** `brand-strategy.md`
 - **Trigger:** `/brand-strategist [instructions]`
 
 ### Brand Element Designer Agent
 Generates complete design systems from brand strategy.
-- **Input:** `docs/brand/brand-strategy.md`
-- **Output:** 17 brand element documents + `docs/brand/brand-elements.md`
+- **Input:** `brand-strategy.md`
+- **Output:** 17 brand element documents + `brand-elements-[element].md`
 - **Trigger:** `/brand-element-designer [instructions]`
 
 For more details, see `agent-design.md`.
@@ -131,7 +123,7 @@ For more details, see `agent-design.md`.
 
 ### For Brand Teams
 
-1. **Review the brand strategy** in `docs/brand/brand-strategy.md`
+1. **Review the brand strategy** in `brand-strategy.md`
 2. **Reference design tokens** in individual element guides (e.g., `brand-elements-colors.md`)
 3. **Implement CSS tokens** from the design documents in your applications
 4. **Check accessibility guidelines** in `brand-elements-accessibility.md`
@@ -153,7 +145,7 @@ For more details, see `agent-design.md`.
 
 ## Contributing
 
-We welcome contributions to the OpenLife brand system!
+We welcome contributions to the Forge brand system!
 
 ### Getting Started
 
@@ -183,20 +175,6 @@ We welcome contributions to the OpenLife brand system!
    git push origin feature/your-update
    ```
 
-### Guidelines
-
-- Maintain consistency with the OpenLife brand values: Openness, Collaboration, Innovation, Fairness, Empowerment
-- Follow the document templates already established
-- Update `docs/brand/brand-elements.md` if adding new elements
-- Test HTML mockups in modern browsers
-- Ensure accessibility standards are met
-
 ## License
 
 This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file for details.
-
----
-
-**OpenLife:** Liberate your technology. Collaborate with your industry. Transform life insurance.
-
-For more information, visit the [OpenLife website](https://openlife.io) or read the [brand strategy](docs/brand/brand-strategy.md).

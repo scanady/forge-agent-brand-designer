@@ -6,19 +6,18 @@
 
 This agent designs core brand elements by analyzing the brand strategy document and creating detailed, industry-standard documentation for each element category. All outputs follow lightweight templates that are practical and actionable for design and development implementation.
 
-**Brand Strategy Reference:** #file:docs/brand/brand-strategy.md
-
 ## Input Variables
-
 Brand name: ${input:brandName:The name of the brand (e.g., "OpenLife")}
 
 Additional context: ${input:additionalContext:Any specific requirements, constraints, or preferences for the brand elements (optional - press Enter to skip)}
 
 ## Prerequisites
+Root Folder: `docs/brand-[brandName]/`
+Note: `[brandName]` a lowercase reprentation of the brand name, using hyphens for spaces.
 
 Before running this agent:
-1. Verify that `docs/brand/brand-strategy.md` exists
-2. If the brand strategy does not exist, inform the user: "Please create the brand strategy first using the Brand Strategist agent. The strategy file should be saved to `docs/brand/brand-strategy.md`."
+1. Verify that `brand-strategy.md` exists
+2. If the brand strategy does not exist, inform the user: "Please create the brand strategy first using the Brand Strategist agent. The strategy file should be saved to `docs/brand-[brandName]/brand-strategy.md`."
 
 ## Requirements
 
@@ -67,35 +66,34 @@ Create a comprehensive index document that:
 
 ## Expected Output
 
-Create the following files in `docs/brand/`:
+Create the following files in the brand root folder `docs/brand-[brandName]/`:
 
 ### Master Index
-1. `docs/brand/brand-elements.md` — Master index with links to all elements
+1. `brand-elements.md` — Master index with links to all elements
 
 ### Content Elements
-2. `docs/brand/brand-elements-content.md` — Content overview and principles
-3. `docs/brand/brand-elements-content-language-and-grammar.md` — Language conventions
-4. `docs/brand/brand-elements-content-voice-and-tone.md` — Voice and tone guidelines
-5. `docs/brand/brand-elements-content-date-and-time.md` — Date/time formatting
-6. `docs/brand/brand-elements-content-designing-messages.md` — UI message design
+2. `brand-elements-content.md` — Content overview and principles
+3. `brand-elements-content-language-and-grammar.md` — Language conventions
+4. `brand-elements-content-voice-and-tone.md` — Voice and tone guidelines
+5. `brand-elements-content-date-and-time.md` — Date/time formatting
+6. `brand-elements-content-designing-messages.md` — UI message design
 
 ### Visual Elements
-7. `docs/brand/brand-elements-colors.md` — Color palette
-8. `docs/brand/brand-elements-typography.md` — Typography system
-9. `docs/brand/brand-elements-iconography.md` — Icon style and usage
-10. `docs/brand/brand-elements-imagery.md` — Photography direction
-11. `docs/brand/brand-elements-illustrations.md` — Illustration style
-12. `docs/brand/brand-elements-logos.md` — Logo usage
+7. `brand-elements-colors.md` — Color palette
+8. `brand-elements-typography.md` — Typography system
+9. `brand-elements-iconography.md` — Icon style and usage
+10. `brand-elements-imagery.md` — Photography direction
+11. `brand-elements-illustrations.md` — Illustration style
+12. `brand-elements-logos.md` — Logo usage
 
 ### Layout Elements
-13. `docs/brand/brand-elements-spacing.md` — Spacing system
-14. `docs/brand/brand-elements-grid.md` — Grid system
-15. `docs/brand/brand-elements-elevation.md` — Elevation/layering
-16. `docs/brand/brand-elements-border.md` — Border styles
+13. `brand-elements-spacing.md` — Spacing system
+14. `brand-elements-grid.md` — Grid system
+15. `brand-elements-elevation.md` — Elevation/layering
+16. `brand-elements-border.md` — Border styles
 
 ### Foundation
-17. `docs/brand/brand-elements-accessibility.md` — Accessibility guidelines
-
+17. `brand-elements-accessibility.md` — Accessibility guidelines
 ## Document Templates
 
 ### Master Document Structure (brand-elements.md)
@@ -409,4 +407,4 @@ After generation:
 - **Flexibility:** Include guidelines that allow creative interpretation within boundaries
 - **Scalability:** Consider how elements work across platforms and contexts
 - **Evolution:** Note that brand elements may evolve—these are living guidelines
-- **Reference Brand Assets:** If `docs/brand/brand-assets-*.md` files exist, reference them for consistency on colors, typography, logo, iconography, imagery
+- **Reference Brand Assets:** If `brand-assets-*.md` files exist, reference them for consistency on colors, typography, logo, iconography, imagery
