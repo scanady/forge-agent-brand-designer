@@ -46,26 +46,6 @@ See the brand in action:
 
 Open any HTML file in your browser to explore.
 
-## Getting Started
-
-### Explore the OpenLife Brand System
-
-Start here if you want to see how a complete brand strategy gets executed:
-
-```bash
-# 1. Read the strategic foundation
-cat docs/brand-openlife/brand-strategy.md
-
-# 2. Review the design system
-cat docs/brand-openlife/brand-elements.md
-
-# 3. Explore individual elements
-# Browse docs/brand-openlife/brand-elements-*.md for specific topics
-
-# 4. See it in practice
-# Open docs/brand-openlife/mock/*.html in your browser
-```
-
 ### Generate Your Own Brand
 
 If you're building a new brand, the agents are ready to work:
