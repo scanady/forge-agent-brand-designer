@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLife Product Management</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* 
+         * OpenLife Design System Tokens 
+         */
+        :root {
+            /* Colors */
+            --color-primary: #0066CC;
+            --color-primary-dark: #0D1B2A;
+            --color-white: #FFFFFF;
+            --color-secondary: #0891B2;
+            --color-tertiary: #4F46E5;
+            --color-accent: #EA580C;
+            
+            /* Grays / Neutrals */
+            --color-gray-50: #F8FAFC;
+            --color-gray-100: #F1F5F9;
+            --color-gray-200: #E2E8F0;
+            --color-gray-300: #CBD5E1;
+            --color-gray-400: #94A3B8;
+            --color-gray-500: #64748B;
+            --color-gray-600: #475569;
+            --color-gray-700: #334155;
+            --color-gray-800: #1E293B;
+            --color-gray-900: #0F172A;
+
+            /* Semantic Colors */
+            --color-success: #059669;
+            --color-success-bg: #DCFCE7;
+            --color-warning: #D97706;
+            --color-warning-bg: #FEF9C3;
+            --color-error: #DC2626;
+            --color-error-bg: #FEE2E2;
+            --color-info: #0284C7;
+            --color-info-bg: #E0F2FE;
+
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-semibold: 600;
+            --font-bold: 700;
+
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-10: 40px;
+            --space-12: 48px;
+
+            /* Borders */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+            --radius-full: 9999px;
+
+            --border-width: 1px;
+            --border-color: var(--color-gray-200);
+
+            /* Elevation */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Reset & Base Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-gray-50);
+            color: var(--color-primary-dark);
+            line-height: 1.5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layout */
+        .sidebar {
+            width: 260px;
+            background-color: var(--color-primary-dark);
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            height: 64px;
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+            flex-shrink: 0;
+        }
+
+        .scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-8);
+        }
+
+        /* Sidebar Components */
+        .brand {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--space-6);
+            font-weight: var(--font-bold);
+            font-size: var(--text-lg);
+            letter-spacing: -0.02em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .brand-icon { color: var(--color-primary); margin-right: var(--space-3); }
+
+        .nav { padding: var(--space-6) var(--space-4); flex: 1; }
+        .nav-section { margin-bottom: var(--space-6); }
+        .nav-title {
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-3);
+            padding-left: var(--space-3);
+            font-weight: var(--font-semibold);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-2) var(--space-3);
+            color: var(--color-gray-300);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-1);
+            transition: all 0.2s ease;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.05); color: var(--color-white); }
+        .nav-item.active { background-color: var(--color-primary); color: var(--color-white); }
+        .nav-item i { margin-right: var(--space-3); width: 20px; }
+
+        .user-profile {
+            padding: var(--space-4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-full);
+            background-color: var(--color-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-bold);
+            font-size: var(--text-xs);
+            margin-right: var(--space-3);
+        }
+
+        .user-info {
+            font-size: var(--text-sm);
+        }
+
+        .user-name {
+            font-weight: var(--font-medium);
+            color: var(--color-white);
+        }
+
+        .user-role {
+            font-size: var(--text-xs);
+            color: var(--color-gray-400);
+        }
+
+        /* Header Components */
+        .breadcrumbs { display: flex; align-items: center; font-size: var(--text-sm); color: var(--color-gray-500); }
+        .breadcrumb-item:not(:last-child)::after { content: '/'; margin: 0 var(--space-2); color: var(--color-gray-300); }
+        .breadcrumb-item.active { color: var(--color-gray-900); font-weight: var(--font-medium); }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--color-gray-500);
+            cursor: pointer;
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: color 0.2s;
+        }
+        .icon-btn:hover { color: var(--color-primary); background-color: var(--color-gray-50); }
+
+        /* Page Content */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-8);
+        }
+
+        .page-title h1 {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            color: var(--color-primary-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle { color: var(--color-gray-500); margin-top: var(--space-1); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-semibold);
+            font-size: var(--text-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            gap: var(--space-2);
+        }
+
+        .btn-primary { background-color: var(--color-primary); color: var(--color-white); }
+        .btn-primary:hover { background-color: #0052a3; box-shadow: var(--shadow-md); }
+        .btn-secondary { background-color: var(--color-white); border-color: var(--color-gray-200); color: var(--color-gray-700); }
+        .btn-secondary:hover { border-color: var(--color-gray-300); background-color: var(--color-gray-50); }
+
+        /* Product Cards Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-gray-300);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-4);
+        }
+
+        .product-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background-color: var(--color-gray-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+        }
+
+        .product-status {
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            padding: 4px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .status-active { background-color: var(--color-success-bg); color: var(--color-success); }
+        .status-draft { background-color: var(--color-warning-bg); color: var(--color-warning); }
+        .status-archived { background-color: var(--color-gray-100); color: var(--color-gray-500); }
+
+        .product-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--color-primary-dark);
+            margin-bottom: var(--space-1);
+        }
+
+        .product-type {
+            font-size: var(--text-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-4);
+        }
+
+        .product-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+            padding: var(--space-4) 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--space-4);
+        }
+
+        .metric-label { font-size: var(--text-xs); color: var(--color-gray-500); margin-bottom: 2px; }
+        .metric-value { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-gray-900); }
+
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: var(--text-xs);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--space-6);
+        }
+
+        .tab {
+            padding: var(--space-3) var(--space-1);
+            margin-right: var(--space-6);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--color-gray-500);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab:hover { color: var(--color-gray-700); }
+        .tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .input-group {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-gray-400);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 12px 10px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <i data-lucide="shield" class="brand-icon"></i>
+            <span>OpenLife</span>
+        </div>
+        
+        <nav class="nav">
+            <div class="nav-section">
+                <div class="nav-title">Management</div>
+                <a href="#" class="nav-item active">
+                    <i data-lucide="package"></i>
+                    Products
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="layers"></i>
+                    Components
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="git-branch"></i>
+                    Rules Engine
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Distribution</div>
+                <a href="#" class="nav-item">
+                    <i data-lucide="globe"></i>
+                    Channels
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="users"></i>
+                    Agents
+                </a>
+            </div>
+        </nav>
+
+        <div class="user-profile">
+            <div class="avatar">JD</div>
+            <div class="user-info">
+                <div class="user-name">Jane Doe</div>
+                <div class="user-role">Product Manager</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="breadcrumbs">
+                <span class="breadcrumb-item">Management</span>
+                <span class="breadcrumb-item active">Products</span>
+            </div>
+            
+            <div class="header-actions">
+                <button class="icon-btn"><i data-lucide="bell"></i></button>
+                <button class="icon-btn"><i data-lucide="help-circle"></i></button>
+            </div>
+        </header>
+
+        <!-- Scrollable Area -->
+        <div class="scroll-area">
+            <div class="page-header">
+                <div>
+                    <div class="page-title">
+                        <h1>Product Catalog</h1>
+                    </div>
+                    <div class="page-subtitle">Manage and configure your insurance product portfolio.</div>
+                </div>
+                <button class="btn btn-primary">
+                    <i data-lucide="plus" width="16"></i>
+                    Create Product
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active">All Products</div>
+                <div class="tab">Active</div>
+                <div class="tab">In Development</div>
+                <div class="tab">Archived</div>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="search-bar">
+                <div class="input-group">
+                    <i data-lucide="search" class="input-icon" width="16"></i>
+                    <input type="text" class="input-field" placeholder="Search products by name, code, or type...">
+                </div>
+                <button class="btn btn-secondary">
+                    <i data-lucide="filter" width="16"></i>
+                    Filters
+                </button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid">
+                
+                <!-- Product Card 1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="product-icon">
+                            <i data-lucide="shield-check" width="20"></i>
+                        </div>
+                        <span class="product-status status-active">Active</span>
+                    </div>
+                    <h3 class="product-title">SafeTerm 20</h3>
+                    <div class="product-type">Term Life Insurance • v2.4</div>
+                    
+                    <div class="product-metrics">
+                        <div>
+                            <div class="metric-label">Policies Sold</div>
+                            <div class="metric-value">12,450</div>
+                        </div>
+                        <div>
+                            <div class="metric-label">Premium Vol</div>
+                            <div class="metric-value">$8.2M</div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" style="flex: 1">Configure</button>
+                        <button class="btn btn-secondary btn-sm"><i data-lucide="more-horizontal" width="16"></i></button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="product-icon" style="color: var(--color-tertiary)">
+                            <i data-lucide="trending-up" width="20"></i>
+                        </div>
+                        <span class="product-status status-draft">Draft</span>
+                    </div>
+                    <h3 class="product-title">WealthBuilder Universal</h3>
+                    <div class="product-type">Universal Life • v1.0-beta</div>
+                    
+                    <div class="product-metrics">
+                        <div>
+                            <div class="metric-label">Launch Date</div>
+                            <div class="metric-value">Nov 15, 2025</div>
+                        </div>
+                        <div>
+                            <div class="metric-label">Completion</div>
+                            <div class="metric-value">85%</div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-sm" style="flex: 1">Resume Edit</button>
+                        <button class="btn btn-secondary btn-sm"><i data-lucide="more-horizontal" width="16"></i></button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="product-icon" style="color: var(--color-accent)">
+                            <i data-lucide="heart" width="20"></i>
+                        </div>
+                        <span class="product-status status-active">Active</span>
+                    </div>
+                    <h3 class="product-title">Senior Care Plus</h3>
+                    <div class="product-type">Whole Life • v3.1</div>
+                    
+                    <div class="product-metrics">
+                        <div>
+                            <div class="metric-label">Policies Sold</div>
+                            <div class="metric-value">45,200</div>
+                        </div>
+                        <div>
+                            <div class="metric-label">Premium Vol</div>
+                            <div class="metric-value">$12.5M</div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" style="flex: 1">Configure</button>
+                        <button class="btn btn-secondary btn-sm"><i data-lucide="more-horizontal" width="16"></i></button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="product-icon" style="color: var(--color-secondary)">
+                            <i data-lucide="briefcase" width="20"></i>
+                        </div>
+                        <span class="product-status status-active">Active</span>
+                    </div>
+                    <h3 class="product-title">ExecTerm 10</h3>
+                    <div class="product-type">Term Life Insurance • v1.2</div>
+                    
+                    <div class="product-metrics">
+                        <div>
+                            <div class="metric-label">Policies Sold</div>
+                            <div class="metric-value">3,100</div>
+                        </div>
+                        <div>
+                            <div class="metric-label">Premium Vol</div>
+                            <div class="metric-value">$15.8M</div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-secondary btn-sm" style="flex: 1">Configure</button>
+                        <button class="btn btn-secondary btn-sm"><i data-lucide="more-horizontal" width="16"></i></button>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="card" style="border-style: dashed; background-color: var(--color-gray-50); align-items: center; justify-content: center; cursor: pointer;">
+                    <div style="width: 48px; height: 48px; background: var(--color-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-3); box-shadow: var(--shadow-sm);">
+                        <i data-lucide="plus" style="color: var(--color-primary);"></i>
+                    </div>
+                    <div style="font-weight: var(--font-medium); color: var(--color-primary);">Create New Product</div>
+                    <div style="font-size: var(--text-xs); color: var(--color-gray-500); margin-top: var(--space-1);">Start from scratch or template</div>
+                </div>
+
+            </div>
+
+            <!-- Recent Updates Section -->
+            <div class="card">
+                <div class="card-header" style="margin-bottom: var(--space-2);">
+                    <h3 class="product-title" style="font-size: var(--text-base);">Recent Configuration Changes</h3>
+                    <button class="btn btn-secondary btn-sm" style="padding: 4px 8px;">View Log</button>
+                </div>
+                <table style="width: 100%; font-size: var(--text-sm); text-align: left; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <th style="padding: 12px 0; color: var(--color-gray-500); font-weight: var(--font-medium);">Product</th>
+                            <th style="padding: 12px 0; color: var(--color-gray-500); font-weight: var(--font-medium);">User</th>
+                            <th style="padding: 12px 0; color: var(--color-gray-500); font-weight: var(--font-medium);">Change</th>
+                            <th style="padding: 12px 0; color: var(--color-gray-500); font-weight: var(--font-medium);">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 12px 0;">SafeTerm 20</td>
+                            <td style="padding: 12px 0;">Jane Doe</td>
+                            <td style="padding: 12px 0;">Updated rate tables for NY</td>
+                            <td style="padding: 12px 0; color: var(--color-gray-500);">2h ago</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 12px 0;">WealthBuilder</td>
+                            <td style="padding: 12px 0;">Mark Smith</td>
+                            <td style="padding: 12px 0;">Modified underwriting rules</td>
+                            <td style="padding: 12px 0; color: var(--color-gray-500);">5h ago</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0;">Senior Care Plus</td>
+                            <td style="padding: 12px 0;">System</td>
+                            <td style="padding: 12px 0;">Auto-deployed v3.1</td>
+                            <td style="padding: 12px 0; color: var(--color-gray-500);">Yesterday</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
