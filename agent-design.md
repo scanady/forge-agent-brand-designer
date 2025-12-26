@@ -101,6 +101,29 @@ The brand elements to create are:
 /brand-asset-designer 
 ```
 
+## UX Designer Agent
+UX Designer - creates comprehensive application mockups with all views, pages, and components for complete user experience design.
+
+```
+/nexus-meta-prompt-generator
+Expert UX designer that creates comprehensive application templates and mockups for all different views/pages in the application. The agent works from the brand strategy in /docs/brand/brand-strategy.md and the brand elements in /docs/brand/brand-elements.md to create interactive HTML mockups. The agent first creates a UX plan document outlining the complete application structure, information architecture, and all views to be created. Then creates each mockup view/page one at a time, ensuring navigation and other links properly link between the views/pages.
+
+The mockups include examples of components like:
+- Navigation (main navigation, sidebar navigation, breadcrumbs, footer)
+- User interface (avatar, preferences, settings, notifications, alerts, tasks)
+- Forms and inputs (text fields, select boxes, checkboxes, radio buttons)
+- Data display (tables, cards, lists, statistics, charts)
+- Feedback (success messages, error messages, warnings, info alerts, toasts)
+- Interactive elements (buttons, modals, dropdowns, accordions, tooltips)
+
+All mockups use design tokens extracted from the brand elements (colors, typography, spacing, borders, elevation, grid) and are saved to /docs/brand-[brandName]/mock/ux/. The agent creates a UX plan first, then creates each view sequentially, ensuring consistent navigation and component usage across all views.
+```
+
+### UX Designer Agent Usage
+```
+/ux-designer create application mockups for a [application type] with [key features]
+```
+
 ## Future (if needed)
 
 ### Brand Conceptualizer Agent

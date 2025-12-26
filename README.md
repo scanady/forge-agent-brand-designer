@@ -33,6 +33,7 @@ Take a look at a branded version of the README in [README-BRANDED.md](README-BRA
 ### 🤖 Brand Design Agents
 - `.github/agents/brand-strategist.agent.md` - Creates brand strategy documents
 - `.github/agents/brand-element-designer.agent.md` - Generates design system elements
+- `.github/agents/forge-ux-designer.agent.md` - Creates comprehensive UX mockups and application templates
 
 ### 📋 Sample Brand Documentation
 - `docs/brand/brand-strategy.md` - Strategic positioning and brand foundation
@@ -63,6 +64,12 @@ To use the brand design agents, you'll need VS Code with GitHub Copilot enabled.
 ```
 /brand-element-designer create design system elements based on brand-strategy.md
 ```
+
+**Create UX Mockups:**
+```
+/ux-designer create application mockups for [your app type]
+```
+
 
 ### View the Brand System (Documentation & Mockups)
 
@@ -105,7 +112,7 @@ forge-agent-brand-designer/
 
 ## Agents & Tools
 
-This project uses two primary agents:
+This project uses three primary agents:
 
 ### Brand Strategist Agent
 Crafts brand positioning, messaging, and strategic direction.
@@ -118,6 +125,13 @@ Generates complete design systems from brand strategy.
 - **Input:** `brand-strategy.md`
 - **Output:** 17 brand element documents + `brand-elements-[element].md`
 - **Trigger:** `/brand-element-designer [instructions]`
+
+### UX Designer Agent
+Creates comprehensive application mockups with navigation and components.
+- **Input:** `brand-strategy.md` + `brand-elements.md` + application requirements
+- **Output:** Interactive HTML mockups in `mock/ux/` directory + UX plan document
+- **Trigger:** `/ux-designer [instructions]`
+
 
 For more details, see `agent-design.md`.
 
