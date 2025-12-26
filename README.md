@@ -1,4 +1,4 @@
-# OpenLife Brand Designer
+# Forge Brand Designer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](#)
@@ -21,14 +21,16 @@ Comprehensive AI-powered brand design system and sample brand strategy. This rep
 
 Forge brand designer is an AI-powered tool for creating comprehensive brand strategies and design systems. This brand designer project documents:
 
-- **Design Agents:** AI-powered agents that create and manage brand content
-- **Design System:** Complete brand elements including colors, typography, spacing, elevation, and accessibility guidelines
+- **Brand Design Agents:** AI-powered agents that create and manage brand content
+- **Brand Design System:** Complete brand elements including colors, typography, spacing, elevation, and accessibility guidelines
 - **Brand Strategy:** Market positioning, values, target audience, and competitive differentiation
 - **Interactive Mockups:** HTML prototypes demonstrating the design system in action
 
+Take a look at a branded version of the README in [README-BRANDED.md](README-BRANDED.md) to see how the output from the brand system comes together. This is a simple example of how the Forge Agent Brand Designer can produce a coherent brand experience.
+
 ## What's Included
 
-### 🤖 Design Agents
+### 🤖 Brand Design Agents
 - `.github/agents/brand-strategist.agent.md` - Creates brand strategy documents
 - `.github/agents/brand-element-designer.agent.md` - Generates design system elements
 
