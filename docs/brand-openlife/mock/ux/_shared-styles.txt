@@ -1,0 +1,2 @@
+This file contains the shared CSS that should be copied to each mockup to maintain consistency.
+The CSS is extracted from home.html and should be used in all pages.
