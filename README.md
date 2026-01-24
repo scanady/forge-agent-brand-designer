@@ -31,8 +31,8 @@ Take a look at a branded version of the README in [README-BRANDED.md](README-BRA
 ## What's Included
 
 ### 🤖 Brand Design Agents
-- `.github/agents/brand-strategist.agent.md` - Creates brand strategy documents
-- `.github/agents/brand-element-designer.agent.md` - Generates design system elements
+- `.github/agents/forge-brand-strategist.agent.md` - Creates brand strategy documents
+- `.github/agents/forge-brand-element-designer.agent.md` - Generates design system elements
 - `.github/agents/forge-ux-designer.agent.md` - Creates comprehensive UX mockups and application templates
 
 ### 📋 Sample Brand Documentation
@@ -57,17 +57,17 @@ To use the brand design agents, you'll need VS Code with GitHub Copilot enabled.
 
 **Create Brand Strategy:**
 ```
-/brand-strategist create a new brand concept for [your company]
+@forge-brand-strategist create a new brand concept for [your company]
 ```
 
 **Generate Design Elements:**
 ```
-/brand-element-designer create design system elements based on brand-strategy.md
+@forge-brand-element-designer create design system elements based on brand-strategy.md
 ```
 
 **Create UX Mockups:**
 ```
-/ux-designer create application mockups for [your app type]
+@forge-ux-designer create application mockups for [your app type]
 ```
 
 
@@ -118,19 +118,19 @@ This project uses three primary agents:
 Crafts brand positioning, messaging, and strategic direction.
 - **Input:** Company details and positioning requirements
 - **Output:** `brand-strategy.md`
-- **Trigger:** `/brand-strategist [instructions]`
+- **Trigger:** `@forge-brand-strategist [instructions]`
 
 ### Brand Element Designer Agent
 Generates complete design systems from brand strategy.
 - **Input:** `brand-strategy.md`
 - **Output:** 17 brand element documents + `brand-elements-[element].md`
-- **Trigger:** `/brand-element-designer [instructions]`
+- **Trigger:** `@forge-brand-element-designer [instructions]`
 
 ### UX Designer Agent
 Creates comprehensive application mockups with navigation and components.
 - **Input:** `brand-strategy.md` + `brand-elements.md` + application requirements
 - **Output:** Interactive HTML mockups in `mock/ux/` directory + UX plan document
-- **Trigger:** `/ux-designer [instructions]`
+- **Trigger:** `@forge-ux-designer [instructions]`
 
 
 For more details, see `agent-design.md`.

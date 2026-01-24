@@ -17,10 +17,11 @@ Here, you'll find:
 
 ### 🤖 Intelligent Brand Design Agents
 
-Two specialized agents do the heavy lifting:
+Three specialized agents do the heavy lifting:
 
-- **Brand Strategist Agent** — Crafts positioning, identifies competitive differentiation, and defines the brand voice your market responds to
-- **Brand Element Designer Agent** — Transforms strategy into a complete design system—colors, typography, icons, spacing, accessibility guidelines, and more
+- **Forge Brand Strategist Agent** — Crafts positioning, identifies competitive differentiation, and defines the brand voice your market responds to
+- **Forge Brand Element Designer Agent** — Transforms strategy into a complete design system—colors, typography, icons, spacing, accessibility guidelines, and more
+- **Forge UX Designer Agent** — Creates comprehensive application mockups with navigation and components
 
 These aren't templates. They're AI collaborators that understand brand architecture and deliver strategic clarity.
 
@@ -54,19 +55,19 @@ If you're building a new brand, the agents are ready to work:
 ```
 In VS Code with GitHub Copilot enabled, use the Brand Strategist agent:
 
-/brand-strategist create a new brand strategy for [your company/product]
+@forge-brand-strategist create a new brand strategy for [your company/product]
 ```
 
 **Step 2: Generate Design Elements**
 ```
 Once you have a strategy document, invoke the Brand Element Designer:
 
-/brand-element-designer create design system elements based on [your-strategy.md]
+@forge-brand-element-designer create design system elements based on [your-strategy.md]
 ```
 
 ## How It Works
 
-### The Brand Strategist Agent
+### The Forge Brand Strategist Agent
 
 **Input:** Your company context, positioning goals, audience, and competitive landscape
 
@@ -80,7 +81,7 @@ Once you have a strategy document, invoke the Brand Element Designer:
 
 **Result:** A single source of truth for how your brand thinks and speaks.
 
-### The Brand Element Designer Agent
+### The Forge Brand Element Designer Agent
 
 **Input:** Your completed brand strategy document
 
