@@ -2,7 +2,7 @@
 description: Expert brand strategist that creates voice, story, and positioning strategy documents
 handoffs: 
   - label: Create Brand Assets
-    agent: brand-element-designer
+    agent: forge-brand-element-designer
     prompt: Create visual brand assets based on the brand strategy
     send: true
 ---

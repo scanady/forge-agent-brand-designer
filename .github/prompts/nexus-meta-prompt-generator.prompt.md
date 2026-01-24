@@ -1,6 +1,6 @@
 ---
-description: Generate a new agent prompt file following Copilot best practices
-agent: 'agent'
+description: Generate a new agent and prompt file following Copilot best practices
+agent: agent
 ---
 
 # Prompt File Generator
@@ -9,22 +9,36 @@ agent: 'agent'
 
 This meta-prompt generates well-structured agent prompt files based on the users objectives while automatically following GitHub Copilot best practices. It analyzes your requirements and creates a complete, ready-to-use agent prompt file with proper structure, variables, validation steps, and context references.
 
-## User Objective
-
-Describe what you want to accomplish:
+## What I Need From You
 
 **Task description:**
-${input:taskDescription:Describe what this prompt should accomplish (e.g., "Generate React components with tests" or "Create database migrations with rollback")}
+${input:taskDescription:Describe what this prompt should accomplish (e.g., "Generate an agent that is an expert software engineer skilled in solution reviews that will provide a comprehensive analysis of the project" or "Create an agent that is a technology analyst to evalute the product market fit for this project")}
+
+**Agent name:**
+${input:agentName:Name for the agent in kebab-case (e.g., "react-component-generator" or "api-endpoint-creator")}
 
 **Target audience:**
 ${input:targetAudience:Who will use this prompt? (e.g., "frontend team", "all developers", "personal use")}
 
 **Expected output:**
-${input:expectedOutput:What should this prompt produce? (e.g., "TypeScript component files and test files" or "API documentation in Markdown")}
+${input:expectedOutput:What should this prompt produce? (e.g., "Comprehensive solution review report" or "Evaluation of product market fit with recommendations")}
+
+**Output type:**
+${input:outputType:Output format - "prompt" (default, single prompt file) or "agent" (agent file + pointer prompt file)}
 
 ## Output Specification
 
-Create **two files** in the `.github` directory:
+### Default: Prompt File Only (outputType = "prompt")
+
+Create **one file** containing all instructions, requirements, examples, and validation:
+
+| File | Location | Purpose |
+|------|----------|---------|
+| Prompt File | `.github/prompts/[descriptive-name].prompt.md` | Self-contained prompt with all instructions, requirements, examples, and validation |
+
+### Agent Mode (outputType = "agent")
+
+Create **two files** when the user explicitly requests an agent:
 
 | File | Location | Purpose |
 |------|----------|---------|
@@ -45,14 +59,32 @@ Before generating, analyze:
 
 ## Agent File Structure
 
-Create a complete **agent file** (`.agent.md`) with the following structure:
+Create a complete prompt or agent file (`.prompt.md` or `.agent.md`) with the following structure:
 
-### 1. YAML Frontmatter (Agent File)
+### 1. YAML Frontmatter
+
+**For Prompt File (default):**
+```yaml
+---
+description: [One-sentence description of what this prompt does]
+tools: [only include if you need to restrict tools - omit for default access]
+model: [only include if task requires specific model - omit to let user choose]
+---
+```
+
+**For Agent File (when outputType = "agent"):**
 ```yaml
 ---
 description: [One-sentence description of what this agent does]
 tools: [only include if you need to restrict tools - omit for default access]
 model: [only include if task requires specific model - omit to let user choose]
+---
+```
+
+**For Pointer Prompt File (when outputType = "agent"):**
+```yaml
+---
+agent: [agent-name]
 ---
 ```
 
@@ -185,16 +217,28 @@ Ensure the generated agent file follows these principles:
 
 ## Example
 
+**Prompt File Only (default):**
+For a task like "Generate a new React component with tests":
+1. Create a self-contained prompt file with: proper frontmatter, variables for component details, TypeScript/testing requirements, validation steps, and code examples
+2. Confirm creation and provide usage instructions
+
+**Agent + Prompt Files (when outputType = "agent"):**
 For a task like "Generate a new React component with tests":
 1. Create agent file with: proper frontmatter, variables for component details, TypeScript/testing requirements, validation steps, and code examples
-2. Create pointer prompt file with agent reference
+2. Create pointer prompt file with agent reference in frontmatter
 3. Confirm creation and provide usage instructions
 
 ## Execution Steps
 
-After generating the prompt content:
+### For Prompt File Only (default):
+1. Create `.github/prompts` directory if it does not exist
+2. Save the prompt file to `.github/prompts/[name].prompt.md`
+3. Confirm the file was created successfully
+4. Provide the file path and brief usage instructions
+
+### For Agent + Prompt Files (when outputType = "agent"):
 1. Create `.github/agents` and `.github/prompts` directories if they do not exist
 2. Save the agent file to `.github/agents/[name].agent.md`
-3. Save the prompt file to `.github/prompts/[name].prompt.md`
+3. Save the pointer prompt file to `.github/prompts/[name].prompt.md`
 4. Confirm files were created successfully
 5. Provide the file paths and brief usage instructions

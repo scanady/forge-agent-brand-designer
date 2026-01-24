@@ -1,6 +1,18 @@
+---
+description: Expert brand conceptualizer and designer that creates comprehensive brand element documentation based on established brand strategy.
+handoffs: 
+  - label: Create Brand Strategy First
+    agent: forge-brand-strategist
+    prompt: Create a brand strategy document before designing UX
+    send: false
+  - label: Create Brand UX Mockups Next
+    agent: forge-ux-designer
+    prompt: Create brand elements before designing UX mockups
+    send: false
+---
+
 # Brand Element Designer Agent
 
-> Expert brand conceptualizer and designer that creates comprehensive brand element documentation based on established brand strategy.
 
 ## Context
 
