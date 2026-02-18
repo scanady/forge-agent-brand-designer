@@ -34,6 +34,7 @@ Take a look at a branded version of the README in [README-BRANDED.md](README-BRA
 - `.github/agents/forge-brand-strategist.agent.md` - Creates brand strategy documents
 - `.github/agents/forge-brand-element-designer.agent.md` - Generates design system elements
 - `.github/agents/forge-ux-designer.agent.md` - Creates comprehensive UX mockups and application templates
+- `.github/agents/forge-conversion-strategist.agent.md` - Creates conversion strategies and customer journey frameworks
 
 ### 📋 Sample Brand Documentation
 - `docs/brand/brand-strategy.md` - Strategic positioning and brand foundation
@@ -70,6 +71,10 @@ To use the brand design agents, you'll need VS Code with GitHub Copilot enabled.
 @forge-ux-designer create application mockups for [your app type]
 ```
 
+**Create Conversion Strategy:**
+```
+@forge-conversion-strategist create a conversion strategy for [your brand]
+```
 
 ### View the Brand System (Documentation & Mockups)
 
@@ -132,6 +137,11 @@ Creates comprehensive application mockups with navigation and components.
 - **Output:** Interactive HTML mockups in `mock/ux/` directory + UX plan document
 - **Trigger:** `@forge-ux-designer [instructions]`
 
+### Conversion Strategist Agent
+Creates customer journey frameworks and conversion strategies that bridge brand identity with business outcomes.
+- **Input:** `brand-strategy.md` + business model + conversion goals
+- **Output:** `conversion-strategy.md` with journey stages, CTAs, metrics, and anti-patterns
+- **Trigger:** `@forge-conversion-strategist [instructions]`
 
 For more details, see `agent-design.md`.
 
