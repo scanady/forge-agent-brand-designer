@@ -41,6 +41,13 @@ Building blocks for consistent, responsive interfaces.
 | [Elevation](brand-elements-elevation.md) | Shadow and layering system |
 | [Border](brand-elements-border.md) | Border styles and patterns |
 
+### UI Components
+Reusable interface components for building modern applications.
+
+| Element | Description |
+|---------|-------------|
+| [UI Components](brand-elements-ui-components.md) | Navigation, menus, avatars, breadcrumbs |
+
 ### Foundation
 Principles that underpin all brand elements.
 
@@ -93,6 +100,15 @@ Principles that underpin all brand elements.
 | Tablet | 768px |
 | Desktop | 1024px |
 | Large | 1280px |
+
+### UI Component Sizes
+
+| Component | Sizes |
+|-----------|-------|
+| Avatar | 16px (xs), 24px (sm), 32px (md), 40px (lg), 48px (xl) |
+| Navigation | 260px sidebar width, 64px header height |
+| Menu Items | 40px (cozy), 32px (compact) |
+| Breadcrumbs | 14px text, 8px gap |
 
 ## Usage Principles
 
