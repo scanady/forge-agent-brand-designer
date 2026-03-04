@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Coaching - Program Detail - Nexus Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --color-primary: #0F766E; --color-primary-dark: #0F172A; --color-white: #FFFFFF;
+            --color-teal-50: #F0FDFA; --color-teal-100: #CCFBF1; --color-teal-500: #14B8A6;
+            --color-teal-600: #0D9488; --color-teal-700: #0F766E; --color-teal-800: #115E59;
+            --color-secondary: #0284C7; --color-tertiary: #6366F1;
+            --color-accent: #D97706; --color-success: #059669; --color-success-light: #D1FAE5;
+            --color-warning: #D97706; --color-warning-light: #FEF3C7;
+            --color-error: #DC2626; --color-error-light: #FEE2E2;
+            --color-info: #0284C7; --color-info-light: #E0F2FE;
+            --color-slate-50: #F8FAFC; --color-slate-100: #F1F5F9; --color-slate-200: #E2E8F0;
+            --color-slate-300: #CBD5E1; --color-slate-400: #94A3B8; --color-slate-500: #64748B;
+            --color-slate-600: #475569; --color-slate-700: #334155; --color-slate-800: #1E293B;
+            --color-slate-900: #0F172A;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+            --text-xl: 1.25rem; --text-2xl: 1.5rem;
+            --font-medium: 500; --font-semibold: 600; --font-bold: 700; --font-extrabold: 800;
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem;
+            --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-full: 9999px;
+            --border-default: #E2E8F0;
+            --shadow-sm: 0 1px 2px rgba(15,23,42,0.05);
+            --sidebar-width: 260px; --header-height: 56px;
+            --z-sidebar: 40; --z-sticky: 30;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-sans); font-size: var(--text-base); color: var(--color-slate-700); background: var(--color-slate-50); line-height: 1.6; }
+        .app-layout { display: flex; min-height: 100vh; }
+        .sidebar { width: var(--sidebar-width); background: var(--color-primary-dark); color: var(--color-white); position: fixed; height: 100vh; overflow-y: auto; z-index: var(--z-sidebar); display: flex; flex-direction: column; padding: var(--space-4); }
+        .sidebar-logo { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-6); text-decoration: none; }
+        .logo-mark { width: 32px; height: 32px; background: var(--color-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; }
+        .logo-mark svg { color: var(--color-white); }
+        .logo-text { font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--color-white); }
+        .nav-section { margin-bottom: var(--space-6); }
+        .nav-section-title { font-size: var(--text-xs); font-weight: var(--font-semibold); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-slate-400); margin-bottom: var(--space-2); padding: 0 var(--space-3); }
+        .nav-item { display: flex; align-items: center; gap: var(--space-3); padding: 10px var(--space-3); border-radius: var(--radius-md); color: var(--color-slate-300); text-decoration: none; font-size: var(--text-sm); font-weight: var(--font-medium); transition: all 150ms ease; margin-bottom: 2px; }
+        .nav-item:hover { background: rgba(255,255,255,0.08); color: var(--color-white); }
+        .nav-item.active { background: var(--color-primary); color: var(--color-white); }
+        .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+        .sidebar-spacer { flex: 1; }
+        .sidebar-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-4); margin-top: var(--space-4); }
+        .sidebar-user { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); cursor: pointer; }
+        .sidebar-user-avatar { width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--color-teal-700); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); font-size: var(--text-sm); }
+        .sidebar-user-info { flex: 1; }
+        .sidebar-user-name { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-white); }
+        .sidebar-user-role { font-size: var(--text-xs); color: var(--color-slate-400); }
+        .main-content { flex: 1; margin-left: var(--sidebar-width); display: flex; flex-direction: column; }
+        .top-header { background: var(--color-white); border-bottom: 1px solid var(--border-default); padding: 0 var(--space-6); height: var(--header-height); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: var(--z-sticky); }
+        .search-bar { flex: 1; max-width: 480px; position: relative; }
+        .search-input { width: 100%; padding: var(--space-2) var(--space-3) var(--space-2) 40px; border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--text-sm); font-family: var(--font-sans); background: var(--color-slate-50); }
+        .search-input::placeholder { color: var(--color-slate-400); }
+        .search-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(15,118,110,0.1); background: var(--color-white); }
+        .search-icon { position: absolute; left: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-slate-400); width: 18px; height: 18px; }
+        .header-actions { display: flex; align-items: center; gap: var(--space-2); }
+        .icon-btn { padding: var(--space-2); background: transparent; border: none; border-radius: var(--radius-md); color: var(--color-slate-500); cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; }
+        .icon-btn:hover { background: var(--color-slate-100); color: var(--color-primary); }
+        .icon-btn svg { width: 20px; height: 20px; }
+        .notification-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: var(--color-error); border: 2px solid var(--color-white); border-radius: var(--radius-full); }
+        .header-user { padding: var(--space-1) var(--space-2); cursor: pointer; margin-left: var(--space-2); }
+        .header-avatar { width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--color-teal-700); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); font-size: var(--text-xs); }
+        .page-content { flex: 1; padding: var(--space-6); max-width: 1280px; }
+
+        .breadcrumb { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-slate-400); margin-bottom: var(--space-5); }
+        .breadcrumb a { color: var(--color-slate-500); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+        .breadcrumb span { color: var(--color-slate-700); font-weight: var(--font-medium); }
+
+        .program-header { margin-bottom: var(--space-6); }
+        .program-header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-3); }
+        .program-header h1 { font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--color-slate-900); }
+        .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: var(--font-semibold); margin-left: var(--space-2); }
+        .badge-active { background: var(--color-success-light); color: var(--color-success); }
+        .program-header p { font-size: var(--text-sm); color: var(--color-slate-500); max-width: 600px; line-height: 1.6; }
+        .btn { display: inline-flex; align-items: center; gap: var(--space-2); padding: 10px var(--space-5); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: var(--font-semibold); font-family: var(--font-sans); text-decoration: none; cursor: pointer; transition: all 150ms ease; border: none; }
+        .btn-primary { background: var(--color-primary); color: var(--color-white); }
+        .btn-secondary { background: var(--color-white); color: var(--color-slate-700); border: 1px solid var(--border-default); }
+        .btn svg { width: 16px; height: 16px; }
+
+        /* Stats */
+        .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
+        .stat-card { background: var(--color-white); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5); }
+        .stat-label { font-size: var(--text-xs); font-weight: var(--font-medium); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-slate-500); margin-bottom: var(--space-1); }
+        .stat-value { font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--color-slate-900); }
+
+        /* Grid */
+        .detail-grid { display: grid; grid-template-columns: 1fr 380px; gap: var(--space-6); }
+        .card { background: var(--color-white); border: 1px solid var(--border-default); border-radius: var(--radius-lg); margin-bottom: var(--space-5); }
+        .card-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border-default); }
+        .card-title { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-slate-900); }
+        .card-body { padding: var(--space-5); }
+        .card-link { font-size: var(--text-sm); color: var(--color-primary); text-decoration: none; font-weight: var(--font-medium); }
+
+        /* Client List */
+        .client-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-slate-100); }
+        .client-row:last-child { border-bottom: none; }
+        .cr-avatar { width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); font-size: var(--text-xs); color: var(--color-white); flex-shrink: 0; }
+        .cr-info { flex: 1; }
+        .cr-name { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-slate-800); }
+        .cr-name a { color: inherit; text-decoration: none; }
+        .cr-name a:hover { color: var(--color-primary); }
+        .cr-detail { font-size: var(--text-xs); color: var(--color-slate-500); }
+        .cr-badge { display: inline-flex; padding: 2px 8px; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: var(--font-semibold); }
+        .badge-engaged { background: var(--color-success-light); color: var(--color-success); }
+        .badge-at-risk { background: var(--color-warning-light); color: var(--color-warning); }
+        .cr-progress { width: 100px; flex-shrink: 0; }
+        .progress-bar { height: 6px; background: var(--color-slate-100); border-radius: 3px; overflow: hidden; margin-bottom: 2px; }
+        .progress-fill { height: 100%; border-radius: 3px; background: var(--color-primary); }
+        .progress-label { font-size: var(--text-xs); color: var(--color-slate-400); text-align: center; }
+
+        /* Info rows */
+        .info-row { display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-slate-100); }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { font-size: var(--text-sm); color: var(--color-slate-500); }
+        .info-value { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-800); }
+
+        /* Milestones */
+        .milestone { display: flex; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-slate-100); }
+        .milestone:last-child { border-bottom: none; }
+        .milestone-num { width: 28px; height: 28px; border-radius: var(--radius-full); background: var(--color-teal-50); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: var(--text-xs); font-weight: var(--font-bold); flex-shrink: 0; }
+        .milestone-title { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-slate-800); }
+        .milestone-desc { font-size: var(--text-xs); color: var(--color-slate-500); }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar" aria-label="Main navigation">
+            <a href="home.html" class="sidebar-logo">
+                <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                <span class="logo-text">Nexus Coach</span>
+            </a>
+            <div class="nav-section">
+                <div class="nav-section-title">Practice</div>
+                <a href="dashboard.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="clients.html" class="nav-item"><i data-lucide="users"></i> Clients</a>
+                <a href="sessions.html" class="nav-item"><i data-lucide="calendar"></i> Sessions</a>
+                <a href="programs.html" class="nav-item active"><i data-lucide="layers"></i> Programs</a>
+                <a href="prospects.html" class="nav-item"><i data-lucide="user-plus"></i> Prospects</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Business</div>
+                <a href="billing.html" class="nav-item"><i data-lucide="credit-card"></i> Billing</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Insights</div>
+                <a href="analytics.html" class="nav-item"><i data-lucide="bar-chart-3"></i> Analytics</a>
+                <a href="coach-performance.html" class="nav-item"><i data-lucide="trophy"></i> Coach Performance</a>
+            </div>
+            <div class="sidebar-spacer"></div>
+            <div class="sidebar-bottom">
+                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">MR</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">Maria Rodriguez</div>
+                        <div class="sidebar-user-role">Practice Lead</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="search-bar"><i data-lucide="search" class="search-icon"></i><input type="text" class="search-input" placeholder="Search clients, sessions, programs..."></div>
+                <div class="header-actions">
+                    <button class="icon-btn" aria-label="Notifications"><i data-lucide="bell"></i><span class="notification-dot"></span></button>
+                    <button class="icon-btn" aria-label="Help"><i data-lucide="help-circle"></i></button>
+                    <div class="header-user"><div class="header-avatar">MR</div></div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="breadcrumb">
+                    <a href="programs.html">Programs</a>
+                    <span style="color:var(--color-slate-300);">/</span>
+                    <span>Executive Coaching</span>
+                </div>
+
+                <div class="program-header">
+                    <div class="program-header-top">
+                        <div>
+                            <h1>Executive Coaching <span class="badge badge-active">Active</span></h1>
+                            <p>One-on-one coaching for senior leaders focused on leadership presence, strategic thinking, and organizational impact. Designed for VP-level and above.</p>
+                        </div>
+                        <div style="display:flex; gap:var(--space-2);">
+                            <button class="btn btn-secondary"><i data-lucide="pencil"></i> Edit</button>
+                            <button class="btn btn-primary"><i data-lucide="user-plus"></i> Enroll Client</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card"><div class="stat-label">Active Clients</div><div class="stat-value">14</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Sessions</div><div class="stat-value">86</div></div>
+                    <div class="stat-card"><div class="stat-label">Avg. Engagement</div><div class="stat-value">91%</div></div>
+                    <div class="stat-card"><div class="stat-label">Revenue MTD</div><div class="stat-value">$14.2K</div></div>
+                    <div class="stat-card"><div class="stat-label">Completion Rate</div><div class="stat-value">78%</div></div>
+                </div>
+
+                <div class="detail-grid">
+                    <div>
+                        <!-- Enrolled Clients -->
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Enrolled Clients (14)</span>
+                                <a href="clients.html" class="card-link">View all</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="client-row">
+                                    <div class="cr-avatar" style="background:var(--color-teal-700);">JW</div>
+                                    <div class="cr-info">
+                                        <div class="cr-name"><a href="client-detail.html">James Wilson</a></div>
+                                        <div class="cr-detail">VP Engineering · Acme Corp · Coach: Maria R.</div>
+                                    </div>
+                                    <span class="cr-badge badge-engaged">Engaged</span>
+                                    <div class="cr-progress">
+                                        <div class="progress-bar"><div class="progress-fill" style="width:50%;"></div></div>
+                                        <div class="progress-label">12/24 sessions</div>
+                                    </div>
+                                </div>
+                                <div class="client-row">
+                                    <div class="cr-avatar" style="background:var(--color-warning);">MP</div>
+                                    <div class="cr-info">
+                                        <div class="cr-name"><a href="client-detail.html">Marcus Patel</a></div>
+                                        <div class="cr-detail">CEO · Patel Consulting · Coach: Maria R.</div>
+                                    </div>
+                                    <span class="cr-badge badge-at-risk">At Risk</span>
+                                    <div class="cr-progress">
+                                        <div class="progress-bar"><div class="progress-fill" style="width:50%; background:var(--color-warning);"></div></div>
+                                        <div class="progress-label">6/12 sessions</div>
+                                    </div>
+                                </div>
+                                <div class="client-row">
+                                    <div class="cr-avatar" style="background:var(--color-error);">AT</div>
+                                    <div class="cr-info">
+                                        <div class="cr-name"><a href="client-detail.html">Amara Thompson</a></div>
+                                        <div class="cr-detail">SVP Operations · Blue Ridge · Coach: Maria R.</div>
+                                    </div>
+                                    <span class="cr-badge" style="background:var(--color-error-light);color:var(--color-error);">Disengaged</span>
+                                    <div class="cr-progress">
+                                        <div class="progress-bar"><div class="progress-fill" style="width:33%; background:var(--color-error);"></div></div>
+                                        <div class="progress-label">4/12 sessions</div>
+                                    </div>
+                                </div>
+                                <div class="client-row">
+                                    <div class="cr-avatar" style="background:var(--color-tertiary);">DL</div>
+                                    <div class="cr-info">
+                                        <div class="cr-name"><a href="client-detail.html">Diana Lee</a></div>
+                                        <div class="cr-detail">CTO · Streamline · Coach: David C.</div>
+                                    </div>
+                                    <span class="cr-badge badge-engaged">Engaged</span>
+                                    <div class="cr-progress">
+                                        <div class="progress-bar"><div class="progress-fill" style="width:75%;"></div></div>
+                                        <div class="progress-label">18/24 sessions</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- Program Details -->
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Program Details</span></div>
+                            <div class="card-body">
+                                <div class="info-row"><span class="info-label">Duration</span><span class="info-value">6–12 months</span></div>
+                                <div class="info-row"><span class="info-label">Sessions</span><span class="info-value">12–24</span></div>
+                                <div class="info-row"><span class="info-label">Frequency</span><span class="info-value">Weekly or Biweekly</span></div>
+                                <div class="info-row"><span class="info-label">Session Length</span><span class="info-value">60 minutes</span></div>
+                                <div class="info-row"><span class="info-label">Price Range</span><span class="info-value">$6,000 – $12,000</span></div>
+                                <div class="info-row"><span class="info-label">Target Audience</span><span class="info-value">VP+ executives</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Program Milestones -->
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Program Milestones</span></div>
+                            <div class="card-body">
+                                <div class="milestone">
+                                    <div class="milestone-num">1</div>
+                                    <div>
+                                        <div class="milestone-title">Assessment & Goal Setting</div>
+                                        <div class="milestone-desc">Sessions 1–3: 360 feedback, strengths inventory, coaching agreement</div>
+                                    </div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-num">2</div>
+                                    <div>
+                                        <div class="milestone-title">Core Development</div>
+                                        <div class="milestone-desc">Sessions 4–12: Skill building, behavior change, practice integration</div>
+                                    </div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-num">3</div>
+                                    <div>
+                                        <div class="milestone-title">Advanced Application</div>
+                                        <div class="milestone-desc">Sessions 13–20: Complex challenges, stakeholder influence, strategic impact</div>
+                                    </div>
+                                </div>
+                                <div class="milestone">
+                                    <div class="milestone-num">4</div>
+                                    <div>
+                                        <div class="milestone-title">Sustainability & Transition</div>
+                                        <div class="milestone-desc">Sessions 21–24: Self-coaching skills, maintenance plan, graduation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

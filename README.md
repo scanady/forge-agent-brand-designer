@@ -58,7 +58,7 @@ To use the brand design agents, you'll need VS Code with GitHub Copilot enabled.
 
 **Create Brand Strategy:**
 ```
-@forge-brand-strategist create a new brand concept for [your company]
+@forge-brand-strategist create a brand concept for [your company]
 ```
 
 **Generate Design Elements:**

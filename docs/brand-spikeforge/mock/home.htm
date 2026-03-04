@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpikeForge - Run Your Practice Like a Product</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-ink-900: #0B1220;
+      --color-ink-800: #1A2438;
+      --color-ink-700: #2B3752;
+      --color-ink-500: #5B6C8D;
+      --color-ink-300: #A9B4C8;
+      --color-ink-200: #D5DCE8;
+      --color-ink-100: #E9EEF5;
+      --color-surface-50: #F6F8FC;
+      --color-white: #FFFFFF;
+      --color-primary: #2E5BFF;
+      --color-primary-100: #E4ECFF;
+      --color-teal-600: #0E9384;
+      --color-teal-100: #DCF6F2;
+      --color-amber-500: #F59E0B;
+      --color-success: #0F9F6E;
+
+      --font-ui: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', Consolas, monospace;
+
+      --radius-md: 12px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+
+      --shadow-sm: 0 2px 8px rgba(11, 18, 32, 0.06);
+      --shadow-md: 0 10px 24px rgba(11, 18, 32, 0.1);
+      --shadow-lg: 0 22px 40px rgba(11, 18, 32, 0.16);
+
+      --max-width: 1200px;
+      --transition-fast: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      color: var(--color-ink-900);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(46, 91, 255, 0.16) 0, rgba(46, 91, 255, 0) 42%),
+        radial-gradient(circle at 8% 35%, rgba(14, 147, 132, 0.14) 0, rgba(14, 147, 132, 0) 32%),
+        linear-gradient(180deg, #FDFEFF 0%, var(--color-surface-50) 38%, #EDF2FA 100%);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .page {
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    .utility-bar {
+      border-bottom: 1px solid var(--color-ink-100);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+    }
+
+    .utility-content {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--color-ink-700);
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      letter-spacing: 0.02em;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(213, 220, 232, 0.7);
+      background: rgba(246, 248, 252, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-content {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(140deg, var(--color-primary) 0%, var(--color-teal-600) 100%);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow-sm);
+      color: var(--color-white);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .brand-text {
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      list-style: none;
+      color: var(--color-ink-700);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      background: var(--color-primary-100);
+      color: var(--color-ink-900);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.62rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+
+    .btn-secondary {
+      background: var(--color-white);
+      border-color: var(--color-ink-200);
+      color: var(--color-ink-800);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-white);
+      box-shadow: 0 10px 24px rgba(46, 91, 255, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 4.2rem 0 3.4rem;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.05rem, 3.8vw, 3.7rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      max-width: 18ch;
+      text-wrap: balance;
+    }
+
+    .serif {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero p {
+      color: var(--color-ink-700);
+      font-size: 1rem;
+      max-width: 58ch;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .kpi {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--color-ink-100);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 0.95rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kpi strong {
+      display: block;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-ink-900);
+    }
+
+    .kpi span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--color-ink-600);
+      margin-top: 0.2rem;
+    }
+
+    .visual-shell {
+      border-radius: 24px;
+      border: 1px solid rgba(213, 220, 232, 0.85);
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .shell-head {
+      min-height: 54px;
+      border-bottom: 1px solid var(--color-ink-100);
+      background: linear-gradient(90deg, rgba(46, 91, 255, 0.08), rgba(14, 147, 132, 0.08));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.76rem;
+      color: var(--color-ink-700);
+    }
+
+    .dot-group {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--color-ink-300);
+    }
+
+    .dot:nth-child(1) { background: #FCA5A5; }
+    .dot:nth-child(2) { background: #FCD34D; }
+    .dot:nth-child(3) { background: #6EE7B7; }
+
+    .shell-body {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      min-height: 360px;
+    }
+
+    .shell-nav {
+      border-right: 1px solid var(--color-ink-100);
+      background: var(--color-ink-900);
+      color: var(--color-ink-200);
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .shell-nav span {
+      padding: 0.5rem 0.6rem;
+      border-radius: 10px;
+      font-size: 0.76rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .shell-nav .active {
+      background: rgba(46, 91, 255, 0.34);
+      color: var(--color-white);
+    }
+
+    .shell-main {
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(228, 236, 255, 0.45) 0%, rgba(255, 255, 255, 0.95) 100%);
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .mini-card {
+      border: 1px solid var(--color-ink-100);
+      border-radius: 10px;
+      background: var(--color-white);
+      padding: 0.62rem;
+    }
+
+    .mini-card small {
+      display: block;
+      color: var(--color-ink-500);
+      font-size: 0.66rem;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .mini-card strong {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .table-sim {
+      border: 1px solid var(--color-ink-100);
+      border-radius: 10px;
+      background: var(--color-white);
+      overflow: hidden;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr 0.8fr;
+      gap: 0.6rem;
+      padding: 0.58rem 0.65rem;
+      border-bottom: 1px solid var(--color-ink-100);
+      font-size: 0.72rem;
+      color: var(--color-ink-700);
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    .row.header {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-ink-500);
+      background: #FAFBFF;
+    }
+
+    .pill {
+      justify-self: start;
+      border-radius: 999px;
+      padding: 0.16rem 0.46rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: var(--color-teal-100);
+      color: #0A7468;
+    }
+
+    .value-band {
+      padding: 2.8rem 0 1.2rem;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .value-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-ink-100);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .value-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: var(--color-ink-700);
+    }
+
+    .workflow {
+      padding: 2.8rem 0 4rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .section-head p {
+      color: var(--color-ink-600);
+      font-size: 0.92rem;
+      max-width: 42ch;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .step {
+      border: 1px solid var(--color-ink-100);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+      padding: 1rem;
+      min-height: 174px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step b {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 0.55rem;
+    }
+
+    .step h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .step p {
+      color: var(--color-ink-700);
+      font-size: 0.85rem;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      right: -0.43rem;
+      top: calc(50% - 0.35rem);
+      width: 0.7rem;
+      height: 0.7rem;
+      border-right: 2px solid var(--color-ink-200);
+      border-top: 2px solid var(--color-ink-200);
+      transform: rotate(45deg);
+      background: var(--color-white);
+      border-radius: 1px;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .cta-panel {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(213, 220, 232, 0.8);
+      background: linear-gradient(120deg, #FFFFFF 0%, #EEF3FF 52%, #E8FAF7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .cta-panel p {
+      color: var(--color-ink-700);
+      font-size: 0.92rem;
+      margin-top: 0.18rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: reveal 700ms ease forwards;
+    }
+
+    .delay-1 { animation-delay: 90ms; }
+    .delay-2 { animation-delay: 180ms; }
+    .delay-3 { animation-delay: 270ms; }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .value-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .shell-body {
+        grid-template-columns: 1fr;
+      }
+
+      .shell-nav {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .step::after {
+        display: none;
+      }
+
+      .cta-panel,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .hero {
+        padding-top: 2.8rem;
+      }
+
+      .kpi-row,
+      .mini-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .utility-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        padding: 0.45rem 0;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .cta-panel .btn {
+        width: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="utility-bar">
+      <div class="container utility-content">
+        <span class="mono">LIVE OPS STATUS: 98.7% workflow completion this week</span>
+        <span>Practice clarity for every coach, every client, every session.</span>
+      </div>
+    </div>
+
+    <header class="top-nav">
+      <div class="container nav-content">
+        <a class="brand" href="#" aria-label="SpikeForge home">
+          <span class="brand-mark">SF</span>
+          <span class="brand-text">SpikeForge</span>
+        </a>
+
+        <ul class="nav-links" aria-label="Primary navigation">
+          <li><a href="#">Platform</a></li>
+          <li><a href="#">Workflow</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="#" class="btn btn-secondary">Sign in</a>
+          <a href="#" class="btn btn-primary">Book a demo</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="fade-in">
+            <p class="eyebrow">Practice operations, refined</p>
+            <h1>
+              Run your practice like a product,
+              <span class="serif">not a patchwork.</span>
+            </h1>
+            <p>
+              SpikeForge brings your full coaching lifecycle into one calm, high-clarity workspace:
+              inquiry, onboarding, sessions, notes, billing, and retention signals.
+            </p>
+
+            <div class="hero-ctas">
+              <a href="#" class="btn btn-primary">Start free trial</a>
+              <a href="#" class="btn btn-secondary">Explore interactive tour</a>
+            </div>
+
+            <div class="kpi-row">
+              <article class="kpi fade-in delay-1">
+                <strong>31%</strong>
+                <span>Faster follow-up after discovery calls</span>
+              </article>
+              <article class="kpi fade-in delay-2">
+                <strong>2.4x</strong>
+                <span>More consistent session cadence</span>
+              </article>
+              <article class="kpi fade-in delay-3">
+                <strong>99%</strong>
+                <span>Invoice delivery reliability</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="visual-shell fade-in delay-2" aria-label="SpikeForge dashboard preview">
+            <div class="shell-head">
+              <div class="dot-group" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="mono">Practice command center</span>
+            </div>
+
+            <div class="shell-body">
+              <nav class="shell-nav" aria-label="Preview sidebar">
+                <span class="active">Dashboard</span>
+                <span>Prospects</span>
+                <span>Sessions</span>
+                <span>Programs</span>
+                <span>Billing</span>
+              </nav>
+
+              <div class="shell-main">
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <small>Active Clients</small>
+                    <strong>42</strong>
+                  </div>
+                  <div class="mini-card">
+                    <small>At Risk</small>
+                    <strong>3</strong>
+                  </div>
+                  <div class="mini-card">
+                    <small>Open Invoices</small>
+                    <strong>7</strong>
+                  </div>
+                </div>
+
+                <div class="table-sim">
+                  <div class="row header">
+                    <span>Client</span>
+                    <span>Next Session</span>
+                    <span>Status</span>
+                  </div>
+                  <div class="row">
+                    <span>Jordan Reeves</span>
+                    <span>Mar 03, 10:00 AM</span>
+                    <span class="pill">On track</span>
+                  </div>
+                  <div class="row">
+                    <span>Amara Fields</span>
+                    <span>Mar 04, 1:30 PM</span>
+                    <span class="pill" style="background:#FFF4D9;color:#B66A00;">Needs touchpoint</span>
+                  </div>
+                  <div class="row">
+                    <span>Noah Carter</span>
+                    <span>Mar 05, 3:00 PM</span>
+                    <span class="pill" style="background:#DFF7EC;color:#0A7A54;">Recovered</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="value-band">
+        <div class="container value-grid">
+          <article class="value-card fade-in">
+            <h3>See the full lifecycle</h3>
+            <p>From inquiry to renewal, every handoff is connected so your team never loses context.</p>
+          </article>
+          <article class="value-card fade-in delay-1">
+            <h3>Surface risk early</h3>
+            <p>Engagement drift, scheduling gaps, and overdue actions are visible before clients disengage.</p>
+          </article>
+          <article class="value-card fade-in delay-2">
+            <h3>Operate with confidence</h3>
+            <p>Structured workflows and clear ownership keep delivery quality high as your practice grows.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="workflow">
+        <div class="container">
+          <div class="section-head fade-in">
+            <div>
+              <p class="eyebrow">One system, four moves</p>
+              <h2>Turn operational complexity into a predictable rhythm.</h2>
+            </div>
+            <p>
+              SpikeForge gives practice leads and coaches a shared operating model that keeps every client journey visible and accountable.
+            </p>
+          </div>
+
+          <div class="steps">
+            <article class="step fade-in">
+              <b>Step 01</b>
+              <h4>Capture interest</h4>
+              <p>Route every inquiry into a clear discovery pipeline with context, ownership, and follow-up dates.</p>
+            </article>
+            <article class="step fade-in delay-1">
+              <b>Step 02</b>
+              <h4>Onboard with precision</h4>
+              <p>Assign the right coach, lock first-session momentum, and establish measurable goals on day one.</p>
+            </article>
+            <article class="step fade-in delay-2">
+              <b>Step 03</b>
+              <h4>Deliver consistently</h4>
+              <p>Run sessions, notes, and action tracking in one flow so quality does not depend on memory.</p>
+            </article>
+            <article class="step fade-in delay-3">
+              <b>Step 04</b>
+              <h4>Renew with clarity</h4>
+              <p>Use progress and utilization signals to guide renewal decisions and sustainable growth.</p>
+            </article>
+          </div>
+
+          <div class="cta-panel fade-in delay-2">
+            <div>
+              <strong>Ready to replace tool sprawl with operational calm?</strong>
+              <p>See SpikeForge configured for your current coaching model in a 20-minute walkthrough.</p>
+            </div>
+            <a href="#" class="btn btn-primary">Request walkthrough</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — iFoundry Media</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --color-primary: #1D4ED8; --color-primary-dark: #0F172A; --color-accent: #EA580C; --color-white: #FFFFFF;
+            --color-blue-50: #EFF6FF; --color-blue-100: #DBEAFE; --color-blue-200: #BFDBFE;
+            --color-blue-500: #3B82F6; --color-blue-700: #1D4ED8; --color-blue-800: #1E40AF; --color-blue-900: #1E3A8A;
+            --color-orange-50: #FFF7ED; --color-orange-600: #EA580C; --color-orange-700: #C2410C;
+            --color-slate-50: #F8FAFC; --color-slate-100: #F1F5F9; --color-slate-200: #E2E8F0;
+            --color-slate-300: #CBD5E1; --color-slate-400: #94A3B8; --color-slate-500: #64748B;
+            --color-slate-600: #475569; --color-slate-700: #334155; --color-slate-800: #1E293B; --color-slate-900: #0F172A;
+            --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.75rem; --text-4xl: 2.25rem;
+            --font-regular: 400; --font-medium: 500; --font-semibold: 600; --font-bold: 700;
+            --leading-tight: 1.15; --leading-snug: 1.35; --leading-relaxed: 1.6; --leading-loose: 1.7;
+            --tracking-tight: -0.02em; --tracking-wide: 0.025em; --tracking-widest: 0.08em;
+            --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+            --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+            --space-16: 64px; --space-20: 80px; --space-24: 96px;
+            --border-1: 1px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-full: 9999px;
+            --border-default: #E2E8F0;
+            --shadow-color: 222 47% 11%;
+            --elevation-1: 0 1px 3px 0 hsl(var(--shadow-color) / 0.05), 0 1px 2px -1px hsl(var(--shadow-color) / 0.05);
+            --elevation-2: 0 2px 8px -1px hsl(var(--shadow-color) / 0.08), 0 1px 3px -1px hsl(var(--shadow-color) / 0.04);
+            --container-max: 1280px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); font-size: var(--text-base); font-weight: var(--font-regular); line-height: var(--leading-relaxed); color: var(--color-slate-700); background: var(--color-white); -webkit-font-smoothing: antialiased; }
+        a { color: var(--color-primary); text-decoration: none; transition: color 0.15s ease; }
+        a:hover { color: var(--color-blue-800); }
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
+
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: var(--border-1) solid var(--border-default); height: 72px; display: flex; align-items: center; }
+        .nav .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-primary-dark); letter-spacing: var(--tracking-tight); }
+        .nav-logo-mark { width: 36px; height: 36px; }
+        .nav-links { display: flex; align-items: center; gap: var(--space-8); list-style: none; }
+        .nav-links a { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-600); letter-spacing: var(--tracking-wide); }
+        .nav-links a:hover { color: var(--color-primary); }
+        .nav-links a.active { color: var(--color-primary); }
+        .nav-cta { display: inline-flex; align-items: center; gap: var(--space-2); background: var(--color-accent); color: var(--color-white) !important; padding: 10px 20px; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: var(--font-semibold); transition: background 0.15s ease; }
+        .nav-cta:hover { background: var(--color-orange-700) !important; color: var(--color-white) !important; }
+
+        .page-hero { padding-top: 144px; padding-bottom: var(--space-16); background: var(--color-slate-50); }
+        .page-hero-overline { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-accent); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: var(--space-4); }
+        .page-hero-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: var(--font-bold); color: var(--color-primary-dark); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-4); max-width: 700px; }
+        .page-hero-subtitle { font-size: var(--text-lg); color: var(--color-slate-500); max-width: 600px; line-height: var(--leading-loose); }
+
+        .section { padding: var(--space-24) 0; }
+
+        /* Contact Layout */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); }
+
+        /* Contact Form */
+        .form-card { background: var(--color-white); border: var(--border-1) solid var(--border-default); border-radius: var(--radius-xl); padding: var(--space-10); box-shadow: var(--elevation-1); }
+        .form-title { font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--color-primary-dark); margin-bottom: var(--space-2); }
+        .form-desc { font-size: var(--text-sm); color: var(--color-slate-500); margin-bottom: var(--space-8); }
+        .form-group { margin-bottom: var(--space-5); }
+        .form-label { display: block; font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-700); margin-bottom: var(--space-2); }
+        .form-label .required { color: var(--color-accent); }
+        .form-input, .form-select, .form-textarea { width: 100%; padding: 10px 14px; font-family: var(--font-sans); font-size: var(--text-sm); border: var(--border-1) solid var(--border-default); border-radius: var(--radius-md); background: var(--color-white); color: var(--color-slate-700); outline: none; transition: border-color 0.15s ease; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1); }
+        .form-input::placeholder, .form-textarea::placeholder { color: var(--color-slate-400); }
+        .form-select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 40px; cursor: pointer; }
+        .form-textarea { min-height: 140px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 12px 24px; border-radius: var(--radius-md); font-family: var(--font-sans); font-size: var(--text-base); font-weight: var(--font-semibold); cursor: pointer; border: none; transition: all 0.15s ease; width: 100%; }
+        .btn-primary { background: var(--color-primary); color: var(--color-white); }
+        .btn-primary:hover { background: var(--color-blue-800); }
+
+        /* Contact Info */
+        .contact-info { display: flex; flex-direction: column; gap: var(--space-10); }
+        .info-card { padding: var(--space-6); border-radius: var(--radius-xl); background: var(--color-slate-50); border: var(--border-1) solid var(--border-default); }
+        .info-card-icon { width: 44px; height: 44px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); }
+        .icon-blue { background: var(--color-blue-50); color: var(--color-primary); }
+        .icon-orange { background: var(--color-orange-50); color: var(--color-accent); }
+        .info-card h3 { font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--color-primary-dark); margin-bottom: var(--space-2); }
+        .info-card p { font-size: var(--text-sm); color: var(--color-slate-500); line-height: var(--leading-loose); }
+        .info-card a { font-size: var(--text-sm); font-weight: var(--font-semibold); }
+
+        /* Discovery CTA */
+        .discovery-card { background: linear-gradient(135deg, var(--color-blue-700) 0%, var(--color-blue-900) 100%); border-radius: var(--radius-xl); padding: var(--space-8); color: var(--color-white); position: relative; overflow: hidden; }
+        .discovery-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(234,88,12,0.2) 0%, transparent 70%); border-radius: 50%; }
+        .discovery-card h3 { font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: var(--space-3); position: relative; }
+        .discovery-card p { font-size: var(--text-sm); color: var(--color-blue-200); line-height: var(--leading-loose); margin-bottom: var(--space-6); position: relative; }
+        .discovery-features { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-6); position: relative; }
+        .discovery-features li { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); color: var(--color-blue-100); }
+        .btn-white { background: var(--color-white); color: var(--color-primary-dark); width: auto; position: relative; }
+        .btn-white:hover { background: var(--color-slate-100); color: var(--color-primary-dark); }
+
+        /* FAQ */
+        .faq-section { padding: var(--space-20) 0; background: var(--color-slate-50); }
+        .faq-title { font-size: var(--text-3xl); font-weight: var(--font-bold); color: var(--color-primary-dark); text-align: center; margin-bottom: var(--space-3); }
+        .faq-subtitle { font-size: var(--text-base); color: var(--color-slate-500); text-align: center; margin-bottom: var(--space-12); }
+        .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); max-width: 960px; margin: 0 auto; }
+        .faq-item { background: var(--color-white); border: var(--border-1) solid var(--border-default); border-radius: var(--radius-xl); padding: var(--space-6); }
+        .faq-question { font-size: var(--text-base); font-weight: var(--font-bold); color: var(--color-primary-dark); margin-bottom: var(--space-3); }
+        .faq-answer { font-size: var(--text-sm); color: var(--color-slate-500); line-height: var(--leading-loose); }
+
+        .footer { background: var(--color-primary-dark); color: var(--color-slate-400); padding: var(--space-16) 0 var(--space-8); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-12); margin-bottom: var(--space-12); }
+        .footer-brand-name { font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-white); margin-bottom: var(--space-3); }
+        .footer-brand-desc { font-size: var(--text-sm); color: var(--color-slate-400); line-height: var(--leading-loose); max-width: 320px; }
+        .footer-col-title { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-white); letter-spacing: var(--tracking-wide); margin-bottom: var(--space-4); }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+        .footer-links a { font-size: var(--text-sm); color: var(--color-slate-400); }
+        .footer-links a:hover { color: var(--color-white); }
+        .footer-bottom { border-top: var(--border-1) solid var(--color-slate-800); padding-top: var(--space-8); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { font-size: var(--text-xs); color: var(--color-slate-500); }
+        .footer-tagline { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-500); font-style: italic; }
+
+        @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .nav-links { display: none; } .section { padding: var(--space-16) 0; } .form-row { grid-template-columns: 1fr; } .faq-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="nav-logo" aria-label="iFoundry Media home">
+                <span class="nav-logo-mark"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="6" r="4.5" stroke="#1D4ED8" stroke-width="3" fill="none"/><circle cx="7" cy="16" r="3.5" stroke="#EA580C" stroke-width="2.5" fill="none"/><circle cx="10" cy="26" r="4.5" stroke="#1D4ED8" stroke-width="3" fill="none"/><line x1="15" y1="8" x2="22" y2="14" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="17" x2="22" y2="17" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="24" x2="22" y2="19" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/><circle cx="27" cy="9" r="3" fill="#EA580C"/><rect x="23" y="12" width="7" height="22" rx="1" fill="#EA580C"/><circle cx="26.5" cy="12" r="1.5" fill="#EA580C"/></svg></span>
+                iFoundry
+            </a>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="nav-cta active">Let's Talk <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <p class="page-hero-overline">Contact</p>
+            <h1 class="page-hero-title">Let's build something together.</h1>
+            <p class="page-hero-subtitle">Have a product idea, a modernization challenge, or just want to explore what's possible? We'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="form-card">
+                    <h2 class="form-title">Send us a message</h2>
+                    <p class="form-desc">Fill out the form and we'll get back to you within one business day.</p>
+                    <form aria-label="Contact form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">First name <span class="required">*</span></label>
+                                <input class="form-input" type="text" id="firstName" placeholder="Jane" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Last name <span class="required">*</span></label>
+                                <input class="form-input" type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Work email <span class="required">*</span></label>
+                            <input class="form-input" type="email" id="email" placeholder="jane@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="company">Company</label>
+                            <input class="form-input" type="text" id="company" placeholder="Acme Inc.">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="projectType">What are you looking for?</label>
+                            <select class="form-select" id="projectType">
+                                <option value="" disabled selected>Select a project type</option>
+                                <option value="incubation">Product Incubation</option>
+                                <option value="engineering">Custom Engineering</option>
+                                <option value="modernization">System Modernization</option>
+                                <option value="ai">AI &amp; Data Solutions</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">Tell us about your project <span class="required">*</span></label>
+                            <textarea class="form-textarea" id="message" placeholder="Describe your project, goals, timeline, or any questions you have..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message <i data-lucide="send" style="width:16px;height:16px;"></i></button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-card-icon icon-blue"><i data-lucide="mail" style="width:20px;height:20px;"></i></div>
+                        <h3>Email us</h3>
+                        <p>For general inquiries and partnership discussions.</p>
+                        <a href="mailto:hello@ifoundry.media">hello@ifoundry.media</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-icon icon-orange"><i data-lucide="map-pin" style="width:20px;height:20px;"></i></div>
+                        <h3>Located in</h3>
+                        <p>We're a distributed team working across time zones. Our headquarters is based in the United States.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-icon icon-blue"><i data-lucide="clock" style="width:20px;height:20px;"></i></div>
+                        <h3>Response time</h3>
+                        <p>We typically respond within one business day. For urgent matters, mention it in your message and we'll prioritize accordingly.</p>
+                    </div>
+
+                    <div class="discovery-card">
+                        <h3>Book a discovery call</h3>
+                        <p>Prefer a conversation? Schedule a 30-minute call to discuss your project with our team.</p>
+                        <ul class="discovery-features">
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Review your product goals and challenges</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Explore technical approaches</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Discuss partnership and engagement models</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> No commitment required</li>
+                        </ul>
+                        <a href="#" class="btn btn-white">Schedule a Call <i data-lucide="calendar" style="width:16px;height:16px;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="faq-title">Common questions</h2>
+            <p class="faq-subtitle">Quick answers to things we're often asked before a first conversation.</p>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">What types of companies do you work with?</div>
+                    <div class="faq-answer">We work with both startups building their first product and established companies modernizing existing systems. Our sweet spot is teams who need a technology partner — not just a vendor.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does the partnership model work?</div>
+                    <div class="faq-answer">Depending on the project, we offer co-ownership, equity participation, and service-based engagements. We build like we own it — and in many cases, we literally do. We'll explore the right model during our discovery call.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What's a typical project timeline?</div>
+                    <div class="faq-answer">Most projects run 6 to 14 months from kickoff to launch. We scope deliberately during discovery and architect for iteration, so you see meaningful progress early — not a big reveal at the end.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you work with existing codebases?</div>
+                    <div class="faq-answer">Absolutely. Our modernization practice is built around incrementally improving legacy systems — preserving what works, replacing what doesn't, and avoiding the risky "big bang" rewrite.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div><div class="footer-brand-name">iFoundry Media</div><p class="footer-brand-desc">A technology foundry that incubates, builds, and scales digital products. We build like we own it — because we do.</p></div>
+                <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+                <div><div class="footer-col-title">Connect</div><ul class="footer-links"><li><a href="contact.html">Contact</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+                <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copyright">&copy; 2026 iFoundry Media. All rights reserved.</span>
+                <span class="footer-tagline">Forged to perform.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

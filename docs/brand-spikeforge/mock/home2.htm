@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SpikeForge — Operational Clarity for Coaching Practices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --ink-900:#0B1220; --ink-800:#1A2438; --ink-700:#2B3752;
+      --ink-600:#415170; --ink-500:#5B6C8D; --ink-400:#8090AC;
+      --ink-300:#A9B4C8; --ink-200:#D5DCE8; --ink-100:#E9EEF5;
+      --surface-50:#F6F8FC; --white:#FFFFFF;
+      --cobalt:#2E5BFF; --cobalt-700:#2448CF; --cobalt-100:#E4ECFF;
+      --teal:#0E9384; --teal-100:#DCF6F2;
+      --amber:#F59E0B; --amber-100:#FFF4D9;
+      --success:#0F9F6E; --success-100:#DFF7EC;
+      --error:#D92D20; --error-100:#FEE4E2;
+
+      --grad-brand:linear-gradient(135deg,#2E5BFF 0%,#0E9384 55%,#7BD8CB 100%);
+      --grad-ink:linear-gradient(160deg,#0B1220 0%,#1A2438 100%);
+
+      --ui:'Manrope',system-ui,sans-serif;
+      --display:'Instrument Serif',Georgia,serif;
+      --mono:'IBM Plex Mono',Consolas,monospace;
+
+      --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:28px;
+      --fast:160ms; --med:280ms; --slow:420ms;
+      --ease:cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--ui);color:var(--ink-900);line-height:1.55;background:var(--surface-50)}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .wrap{width:min(1260px,100% - 2.5rem);margin-inline:auto}
+    .wrap-narrow{width:min(880px,100% - 2.5rem);margin-inline:auto}
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .site-nav{position:fixed;inset-inline:0;top:0;z-index:100;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      transition:background var(--med) var(--ease),border-color var(--med) var(--ease)}
+    .site-nav.scrolled{background:rgba(11,18,32,.92);backdrop-filter:blur(16px);
+      border-color:rgba(255,255,255,.08)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;
+      min-height:72px;gap:1rem}
+    .logo{display:flex;align-items:center;gap:.65rem}
+    .logo-icon{width:32px;height:32px;border-radius:var(--r-sm);
+      background:var(--grad-brand);display:grid;place-items:center;
+      color:var(--white);font-weight:800;font-size:.82rem;
+      box-shadow:0 0 28px rgba(46,91,255,.35)}
+    .logo-text{font-weight:800;font-size:1rem;letter-spacing:.015em;color:var(--white)}
+    .nav-links{display:flex;gap:.25rem}
+    .nav-links a{padding:.5rem .8rem;border-radius:999px;font-size:.86rem;font-weight:600;
+      color:rgba(255,255,255,.65);transition:color var(--fast),background var(--fast)}
+    .nav-links a:hover{color:var(--white);background:rgba(255,255,255,.08)}
+    .nav-ctas{display:flex;gap:.55rem;align-items:center}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;
+      border:1px solid transparent;border-radius:999px;font-family:var(--ui);
+      font-weight:700;font-size:.86rem;cursor:pointer;
+      transition:transform var(--fast) var(--ease),box-shadow var(--fast) var(--ease),
+      background var(--fast) var(--ease),color var(--fast)}
+    .btn:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+    .btn-sm{padding:.52rem 1.05rem}
+    .btn-md{padding:.7rem 1.4rem;font-size:.92rem}
+    .btn-lg{padding:.82rem 1.8rem;font-size:1rem}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-ghost{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.18)}
+    .btn-ghost:hover{color:var(--white);background:rgba(255,255,255,.08)}
+    .btn-fill{background:var(--cobalt);color:var(--white);
+      box-shadow:0 8px 22px rgba(46,91,255,.32)}
+    .btn-fill:hover{box-shadow:0 12px 30px rgba(46,91,255,.42)}
+    .btn-fill-light{background:var(--cobalt);color:var(--white);
+      box-shadow:0 6px 18px rgba(46,91,255,.28)}
+    .btn-outline{border-color:var(--ink-200);color:var(--ink-700);background:var(--white)}
+    .btn-outline:hover{border-color:var(--cobalt);color:var(--cobalt)}
+
+    /* ============================================================
+       HERO — DARK CINEMATIC
+       ============================================================ */
+    .hero{position:relative;overflow:hidden;
+      background:var(--ink-900);color:var(--white);
+      padding:10rem 0 5.5rem}
+
+    .hero-glow{position:absolute;pointer-events:none;inset:0;
+      background:
+        radial-gradient(ellipse 70% 55% at 25% 60%,rgba(46,91,255,.22),transparent),
+        radial-gradient(ellipse 50% 45% at 80% 30%,rgba(14,147,132,.18),transparent),
+        radial-gradient(ellipse 40% 30% at 60% 80%,rgba(245,158,11,.06),transparent)}
+
+    .hero-grid-line{position:absolute;inset:0;pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+      background-size:64px 64px}
+
+    .hero-content{position:relative;z-index:2;text-align:center;
+      display:flex;flex-direction:column;align-items:center}
+
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;
+      padding:.42rem .9rem .42rem .52rem;border-radius:999px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+      font-size:.76rem;font-weight:600;color:rgba(255,255,255,.7);
+      margin-bottom:1.6rem;backdrop-filter:blur(6px)}
+    .hero-badge-dot{width:7px;height:7px;border-radius:999px;background:var(--success);
+      box-shadow:0 0 8px var(--success);flex-shrink:0}
+
+    .hero h1{font-family:var(--ui);font-weight:800;
+      font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.04;
+      letter-spacing:-.035em;max-width:18ch;margin-bottom:1rem;text-wrap:balance}
+    .hero h1 em{font-family:var(--display);font-weight:400;font-style:italic;
+      background:var(--grad-brand);-webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;background-clip:text}
+
+    .hero-sub{font-size:clamp(.95rem,1.3vw,1.18rem);line-height:1.6;
+      color:rgba(255,255,255,.58);max-width:52ch;margin-bottom:2rem}
+
+    .hero-ctas{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;
+      margin-bottom:3.2rem}
+
+    /* floating metric chips */
+    .hero-metrics{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+    .metric-chip{display:flex;align-items:center;gap:.55rem;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--r-lg);padding:.6rem .9rem;backdrop-filter:blur(8px);
+      transition:border-color var(--fast)}
+    .metric-chip:hover{border-color:rgba(46,91,255,.35)}
+    .metric-chip strong{font-size:1.35rem;font-weight:800;
+      letter-spacing:-.02em;color:var(--white)}
+    .metric-chip span{font-size:.78rem;color:rgba(255,255,255,.5);max-width:14ch}
+    .metric-chip .mc-icon{width:36px;height:36px;border-radius:10px;
+      display:grid;place-items:center;font-size:.85rem;font-weight:800;flex-shrink:0}
+    .mc-cobalt{background:rgba(46,91,255,.18);color:#7BA0FF}
+    .mc-teal{background:rgba(14,147,132,.18);color:#64DCCC}
+    .mc-amber{background:rgba(245,158,11,.15);color:#FBBF4D}
+
+    /* ============================================================
+       PRODUCT SHOWCASE — FLOATING BROWSER
+       ============================================================ */
+    .showcase{position:relative;z-index:3;margin-top:-2.8rem;padding-bottom:4rem}
+    .browser{border-radius:var(--r-2xl);overflow:hidden;
+      border:1px solid var(--ink-200);
+      background:var(--white);
+      box-shadow:
+        0 2px 4px rgba(11,18,32,.04),
+        0 12px 32px rgba(11,18,32,.08),
+        0 40px 80px rgba(11,18,32,.10);
+      max-width:1080px;margin-inline:auto}
+    .browser-bar{display:flex;align-items:center;justify-content:space-between;
+      padding:.55rem 1rem;border-bottom:1px solid var(--ink-100);
+      background:linear-gradient(180deg,#FAFBFF,#F4F6FC)}
+    .browser-dots{display:flex;gap:.38rem}
+    .browser-dots i{width:10px;height:10px;border-radius:999px;display:block}
+    .browser-dots i:nth-child(1){background:#FCA5A5}
+    .browser-dots i:nth-child(2){background:#FCD34D}
+    .browser-dots i:nth-child(3){background:#86EFAC}
+    .browser-url{flex:1;max-width:420px;margin-inline:auto;height:28px;
+      border-radius:999px;background:var(--white);border:1px solid var(--ink-100);
+      display:flex;align-items:center;padding:0 .7rem;
+      font-family:var(--mono);font-size:.65rem;color:var(--ink-400)}
+
+    .app-shell{display:grid;grid-template-columns:220px 1fr;min-height:420px}
+
+    /* sidebar */
+    .app-sidebar{background:var(--ink-900);padding:1rem .75rem;
+      display:flex;flex-direction:column;gap:.18rem}
+    .sb-brand{display:flex;align-items:center;gap:.5rem;padding:.45rem .5rem;
+      margin-bottom:.6rem}
+    .sb-mark{width:26px;height:26px;border-radius:7px;background:var(--grad-brand);
+      display:grid;place-items:center;color:var(--white);font-size:.7rem;font-weight:800}
+    .sb-name{color:var(--white);font-size:.8rem;font-weight:700}
+    .sb-section{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-500);padding:.65rem .5rem .3rem}
+    .sb-item{display:flex;align-items:center;gap:.5rem;padding:.48rem .55rem;
+      border-radius:var(--r-sm);font-size:.78rem;color:var(--ink-300);
+      transition:background var(--fast)}
+    .sb-item:hover{background:rgba(255,255,255,.06)}
+    .sb-item.active{background:rgba(46,91,255,.22);color:var(--white)}
+    .sb-icon{width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,.06);
+      display:grid;place-items:center;font-size:.58rem;font-weight:700;flex-shrink:0}
+
+    /* main content */
+    .app-main{padding:1.1rem;display:flex;flex-direction:column;gap:.85rem;
+      background:var(--surface-50)}
+    .am-topbar{display:flex;align-items:center;justify-content:space-between}
+    .am-topbar h3{font-size:.95rem;font-weight:700}
+    .am-search{width:200px;height:30px;border-radius:999px;
+      background:var(--white);border:1px solid var(--ink-100);display:flex;
+      align-items:center;padding:0 .6rem;font-size:.68rem;color:var(--ink-400)}
+
+    .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+    .kpi-card{border:1px solid var(--ink-100);border-radius:var(--r-md);
+      background:var(--white);padding:.7rem .75rem;position:relative;overflow:hidden}
+    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .kpi-card:nth-child(1)::before{background:var(--cobalt)}
+    .kpi-card:nth-child(2)::before{background:var(--teal)}
+    .kpi-card:nth-child(3)::before{background:var(--amber)}
+    .kpi-card:nth-child(4)::before{background:var(--success)}
+    .kpi-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-500);margin-bottom:.25rem}
+    .kpi-val{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+    .kpi-delta{font-size:.62rem;font-weight:600;margin-left:.3rem}
+    .kpi-up{color:var(--success)}
+    .kpi-down{color:var(--error)}
+
+    .data-table{border:1px solid var(--ink-100);border-radius:var(--r-md);
+      background:var(--white);overflow:hidden}
+    .dt-row{display:grid;
+      grid-template-columns:1.5fr 1fr .9fr .7fr;
+      padding:.5rem .65rem;font-size:.72rem;color:var(--ink-700);
+      border-bottom:1px solid var(--ink-100);align-items:center}
+    .dt-row:last-child{border-bottom:0}
+    .dt-header{background:#FAFBFF;font-family:var(--mono);font-size:.6rem;
+      text-transform:uppercase;letter-spacing:.06em;color:var(--ink-500)}
+    .dt-name{font-weight:700;color:var(--ink-900);display:flex;align-items:center;gap:.4rem}
+    .dt-avatar{width:22px;height:22px;border-radius:999px;display:grid;
+      place-items:center;font-size:.52rem;font-weight:800;color:var(--white);flex-shrink:0}
+    .badge{padding:.14rem .42rem;border-radius:999px;font-size:.58rem;
+      font-weight:700;letter-spacing:.02em;display:inline-block}
+    .badge-active{background:var(--success-100);color:#0A7A54}
+    .badge-warn{background:var(--amber-100);color:#956A00}
+    .badge-risk{background:var(--error-100);color:#B42318}
+
+    /* ============================================================
+       VALUE PROPS
+       ============================================================ */
+    .values{padding:4.5rem 0}
+    .section-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--cobalt);margin-bottom:.8rem}
+    .section-title{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;
+      letter-spacing:-.025em;line-height:1.12;margin-bottom:.6rem;max-width:22ch}
+    .section-sub{color:var(--ink-600);font-size:1rem;max-width:54ch;margin-bottom:2.2rem}
+
+    .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .v-card{background:var(--white);
+      border:1px solid var(--ink-100);border-radius:var(--r-xl);
+      padding:1.4rem;position:relative;overflow:hidden;
+      transition:transform var(--med) var(--ease),box-shadow var(--med) var(--ease)}
+    .v-card:hover{transform:translateY(-3px);
+      box-shadow:0 16px 40px rgba(11,18,32,.09)}
+    .v-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:var(--grad-brand);opacity:.65}
+    .v-num{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;
+      color:var(--cobalt);margin-bottom:.7rem}
+    .v-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.01em}
+    .v-card p{font-size:.9rem;color:var(--ink-600);line-height:1.55}
+
+    /* ============================================================
+       SOCIAL PROOF STRIP
+       ============================================================ */
+    .proof{padding:3rem 0;border-top:1px solid var(--ink-100);border-bottom:1px solid var(--ink-100);
+      background:linear-gradient(180deg,var(--white),var(--surface-50))}
+    .proof-inner{display:flex;align-items:center;justify-content:center;gap:2.8rem;
+      flex-wrap:wrap}
+    .proof-stat{text-align:center}
+    .proof-stat strong{display:block;font-size:2rem;font-weight:800;letter-spacing:-.03em}
+    .proof-stat span{display:block;font-size:.78rem;color:var(--ink-500)}
+    .proof-divider{width:1px;height:40px;background:var(--ink-200)}
+
+    /* ============================================================
+       TESTIMONIAL
+       ============================================================ */
+    .testimonial{padding:4.5rem 0;background:var(--white)}
+    .quote-card{max-width:780px;margin-inline:auto;text-align:center;position:relative}
+    .quote-mark{font-family:var(--display);font-size:5rem;line-height:1;
+      color:var(--cobalt);opacity:.18;margin-bottom:-.5rem}
+    .quote-text{font-family:var(--display);font-size:clamp(1.3rem,2.4vw,1.85rem);
+      line-height:1.4;color:var(--ink-800);margin-bottom:1.4rem;
+      text-wrap:balance}
+    .quote-author{display:flex;align-items:center;gap:.7rem;justify-content:center}
+    .quote-avatar{width:44px;height:44px;border-radius:999px;
+      background:var(--grad-brand);display:grid;place-items:center;
+      color:var(--white);font-weight:800;font-size:.85rem}
+    .quote-meta strong{display:block;font-size:.88rem;font-weight:700}
+    .quote-meta span{font-size:.78rem;color:var(--ink-500)}
+
+    /* ============================================================
+       WORKFLOW SECTION
+       ============================================================ */
+    .workflow{padding:4.5rem 0}
+    .wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+    .wf-step{padding:1.15rem;border-radius:var(--r-lg);
+      border:1px solid var(--ink-100);background:var(--white);
+      position:relative;transition:border-color var(--fast)}
+    .wf-step:hover{border-color:var(--cobalt)}
+    .wf-num{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;
+      font-family:var(--mono);font-size:.7rem;font-weight:700;
+      background:var(--cobalt-100);color:var(--cobalt);margin-bottom:.7rem}
+    .wf-step h4{font-size:.98rem;font-weight:700;margin-bottom:.35rem}
+    .wf-step p{font-size:.84rem;color:var(--ink-600);line-height:1.5}
+    .wf-connector{display:none;position:absolute;right:-0.45rem;top:50%;
+      width:.9rem;height:.9rem;border-right:2px solid var(--ink-200);
+      border-top:2px solid var(--ink-200);transform:rotate(45deg) translateY(-50%);
+      background:var(--white)}
+
+    /* ============================================================
+       CTA BANNER
+       ============================================================ */
+    .cta-section{padding:0 0 5rem}
+    .cta-banner{border-radius:var(--r-2xl);overflow:hidden;position:relative;
+      padding:3.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;
+      gap:1.5rem;background:var(--ink-900);color:var(--white)}
+    .cta-banner-glow{position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 55% 70% at 10% 50%,rgba(46,91,255,.25),transparent),
+        radial-gradient(ellipse 40% 50% at 90% 50%,rgba(14,147,132,.2),transparent)}
+    .cta-banner>*{position:relative;z-index:2}
+    .cta-banner h2{font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:800;
+      letter-spacing:-.02em;max-width:18ch;line-height:1.12}
+    .cta-banner p{color:rgba(255,255,255,.55);font-size:.92rem;margin-top:.35rem;max-width:40ch}
+    .cta-banner-actions{display:flex;gap:.6rem;flex-shrink:0}
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer{background:var(--ink-900);color:rgba(255,255,255,.45);
+      padding:2.5rem 0 1.8rem;font-size:.78rem}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .footer-links{display:flex;gap:1.2rem}
+    .footer-links a{color:rgba(255,255,255,.45);transition:color var(--fast)}
+    .footer-links a:hover{color:var(--white)}
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    [data-reveal]{opacity:0;transform:translateY(20px);
+      transition:opacity var(--slow) var(--ease),transform var(--slow) var(--ease)}
+    [data-reveal].visible{opacity:1;transform:none}
+    [data-reveal="1"]{transition-delay:60ms}
+    [data-reveal="2"]{transition-delay:130ms}
+    [data-reveal="3"]{transition-delay:200ms}
+    [data-reveal="4"]{transition-delay:270ms}
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:1ms!important;transition-duration:1ms!important;
+        scroll-behavior:auto!important}
+      [data-reveal]{opacity:1;transform:none}
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media(max-width:1024px){
+      .app-shell{grid-template-columns:1fr}
+      .app-sidebar{flex-direction:row;overflow-x:auto;padding:.6rem .75rem;gap:.35rem}
+      .sb-section{display:none}
+      .sb-brand{margin-bottom:0;margin-right:.6rem}
+      .kpi-strip{grid-template-columns:repeat(2,1fr)}
+      .value-grid,.wf-grid{grid-template-columns:1fr 1fr}
+      .wf-connector{display:none}
+    }
+    @media(max-width:760px){
+      .hero{padding:8rem 0 4rem}
+      .nav-links{display:none}
+      .nav-ctas .btn-ghost{display:none}
+      .kpi-strip,.value-grid,.wf-grid{grid-template-columns:1fr}
+      .cta-banner{flex-direction:column;text-align:center;padding:2.2rem 1.5rem}
+      .cta-banner-actions{justify-content:center}
+      .hero-metrics{flex-direction:column;align-items:center}
+      .proof-inner{flex-direction:column;gap:1.4rem}
+      .proof-divider{width:40px;height:1px}
+      .footer-inner{flex-direction:column;text-align:center;gap:.8rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAV ========== -->
+  <header class="site-nav" id="siteNav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#" aria-label="SpikeForge home">
+        <span class="logo-icon" aria-hidden="true">SF</span>
+        <span class="logo-text">SpikeForge</span>
+      </a>
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="#">Platform</a></li>
+        <li><a href="#">Workflow</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Docs</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a href="#" class="btn btn-sm btn-ghost">Sign in</a>
+        <a href="#" class="btn btn-sm btn-fill">Start free</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grid-line" aria-hidden="true"></div>
+    <div class="wrap hero-content">
+      <div class="hero-badge" data-reveal>
+        <span class="hero-badge-dot" aria-hidden="true"></span>
+        Trusted by 200+ coaching practices
+      </div>
+      <h1 data-reveal="1">
+        Operational clarity<br>for <em>every session.</em>
+      </h1>
+      <p class="hero-sub" data-reveal="2">
+        Pipeline, onboarding, delivery, billing, and retention
+        in one calm, high-clarity workspace. Stop patching tools together
+        and start running your practice like a product.
+      </p>
+      <div class="hero-ctas" data-reveal="3">
+        <a href="#" class="btn btn-md btn-fill">Start 14-day free trial</a>
+        <a href="#" class="btn btn-md btn-ghost">Watch the demo &rarr;</a>
+      </div>
+      <div class="hero-metrics" data-reveal="4">
+        <div class="metric-chip">
+          <span class="mc-icon mc-cobalt" aria-hidden="true">%</span>
+          <div><strong>31%</strong><span>Faster prospect follow-up</span></div>
+        </div>
+        <div class="metric-chip">
+          <span class="mc-icon mc-teal" aria-hidden="true">&uarr;</span>
+          <div><strong>2.4x</strong><span>Session cadence consistency</span></div>
+        </div>
+        <div class="metric-chip">
+          <span class="mc-icon mc-amber" aria-hidden="true">$</span>
+          <div><strong>99%</strong><span>Invoice delivery reliability</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCT SHOWCASE ========== -->
+  <section class="showcase">
+    <div class="wrap">
+      <div class="browser" data-reveal>
+        <div class="browser-bar">
+          <div class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="browser-url">app.spikeforge.io/dashboard</div>
+          <span></span>
+        </div>
+        <div class="app-shell">
+          <nav class="app-sidebar" aria-label="App navigation preview">
+            <div class="sb-brand">
+              <span class="sb-mark" aria-hidden="true">SF</span>
+              <span class="sb-name">SpikeForge</span>
+            </div>
+            <span class="sb-section">Operate</span>
+            <a class="sb-item active" href="#"><span class="sb-icon" aria-hidden="true">D</span> Dashboard</a>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">P</span> Prospects</a>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">C</span> Clients</a>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">S</span> Sessions</a>
+            <span class="sb-section">Manage</span>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">B</span> Billing</a>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">T</span> Team</a>
+            <a class="sb-item" href="#"><span class="sb-icon" aria-hidden="true">A</span> Analytics</a>
+          </nav>
+          <div class="app-main">
+            <div class="am-topbar">
+              <h3>Good morning, Sarah.</h3>
+              <div class="am-search">&loupe; Search clients, sessions&hellip;</div>
+            </div>
+            <div class="kpi-strip">
+              <div class="kpi-card">
+                <div class="kpi-label">Active clients</div>
+                <div class="kpi-val">42 <span class="kpi-delta kpi-up">+3</span></div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Sessions this week</div>
+                <div class="kpi-val">28 <span class="kpi-delta kpi-up">+5</span></div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Engagement risk</div>
+                <div class="kpi-val">3 <span class="kpi-delta kpi-down">&darr;1</span></div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Revenue MTD</div>
+                <div class="kpi-val">$18.4k <span class="kpi-delta kpi-up">+12%</span></div>
+              </div>
+            </div>
+            <div class="data-table">
+              <div class="dt-row dt-header">
+                <span>Client</span><span>Next session</span><span>Program</span><span>Status</span>
+              </div>
+              <div class="dt-row">
+                <span class="dt-name"><span class="dt-avatar" style="background:var(--cobalt)" aria-hidden="true">JR</span> Jordan Reeves</span>
+                <span>Mar 3, 10:00 AM</span><span>Leadership Accel.</span>
+                <span class="badge badge-active">On track</span>
+              </div>
+              <div class="dt-row">
+                <span class="dt-name"><span class="dt-avatar" style="background:var(--teal)" aria-hidden="true">AF</span> Amara Fields</span>
+                <span>Mar 4, 1:30 PM</span><span>Exec Coaching</span>
+                <span class="badge badge-warn">Needs touchpoint</span>
+              </div>
+              <div class="dt-row">
+                <span class="dt-name"><span class="dt-avatar" style="background:var(--amber)" aria-hidden="true">NC</span> Noah Carter</span>
+                <span>Mar 5, 3:00 PM</span><span>Career Growth</span>
+                <span class="badge badge-active">Recovered</span>
+              </div>
+              <div class="dt-row">
+                <span class="dt-name"><span class="dt-avatar" style="background:var(--ink-500)" aria-hidden="true">ML</span> Maya Laurent</span>
+                <span>Mar 6, 9:00 AM</span><span>Team Lead Dev</span>
+                <span class="badge badge-risk">At risk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOCIAL PROOF ========== -->
+  <section class="proof">
+    <div class="wrap proof-inner" aria-label="Key metrics">
+      <div class="proof-stat" data-reveal><strong>200+</strong><span>Coaching practices</span></div>
+      <div class="proof-divider" aria-hidden="true"></div>
+      <div class="proof-stat" data-reveal="1"><strong>14,000</strong><span>Sessions tracked / mo</span></div>
+      <div class="proof-divider" aria-hidden="true"></div>
+      <div class="proof-stat" data-reveal="2"><strong>$2.8M</strong><span>Monthly billing processed</span></div>
+      <div class="proof-divider" aria-hidden="true"></div>
+      <div class="proof-stat" data-reveal="3"><strong>99.7%</strong><span>Platform uptime</span></div>
+    </div>
+  </section>
+
+  <!-- ========== VALUE PROPS ========== -->
+  <section class="values">
+    <div class="wrap">
+      <p class="section-label" data-reveal>Why SpikeForge</p>
+      <h2 class="section-title" data-reveal="1">Replace tool sprawl with operational confidence.</h2>
+      <p class="section-sub" data-reveal="2">One system that connects every handoff from first inquiry to program renewal, so you never lose context or momentum.</p>
+      <div class="value-grid">
+        <article class="v-card" data-reveal>
+          <div class="v-num">01</div>
+          <h3>Full lifecycle visibility</h3>
+          <p>Prospects, clients, sessions, notes, billing, and renewals are unified in one workspace. Every relationship has a visible thread from start to finish.</p>
+        </article>
+        <article class="v-card" data-reveal="1">
+          <div class="v-num">02</div>
+          <h3>Risk before it's a problem</h3>
+          <p>Engagement drift, scheduling gaps, overdue notes, and at-risk clients surface automatically so you can intervene early — not after the fact.</p>
+        </article>
+        <article class="v-card" data-reveal="2">
+          <div class="v-num">03</div>
+          <h3>Consistent delivery at scale</h3>
+          <p>Structured workflows, clear ownership, and embedded best practices keep quality high whether you're running 5 clients or 500.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIAL ========== -->
+  <section class="testimonial">
+    <div class="wrap">
+      <div class="quote-card" data-reveal>
+        <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+        <p class="quote-text">
+          We went from five disconnected tools and a spreadsheet to one place
+          where I can see every client, every session, every open invoice.
+          The operational calm is real.
+        </p>
+        <div class="quote-author">
+          <span class="quote-avatar" aria-hidden="true">DL</span>
+          <div class="quote-meta">
+            <strong>Diana Lawson</strong>
+            <span>Practice Lead, Meridian Coaching Group</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WORKFLOW ========== -->
+  <section class="workflow">
+    <div class="wrap">
+      <p class="section-label" data-reveal>How it works</p>
+      <h2 class="section-title" data-reveal="1">Four moves. One rhythm.</h2>
+      <p class="section-sub" data-reveal="2">SpikeForge replaces operational fragmentation with a predictable operating model for every coaching engagement.</p>
+      <div class="wf-grid">
+        <article class="wf-step" data-reveal>
+          <div class="wf-num">01</div>
+          <h4>Capture interest</h4>
+          <p>Route every inquiry into a clear discovery pipeline with context, ownership, and follow-up accountability.</p>
+        </article>
+        <article class="wf-step" data-reveal="1">
+          <div class="wf-num">02</div>
+          <h4>Onboard with precision</h4>
+          <p>Assign the right coach, lock first-session momentum, and establish measurable goals on day one.</p>
+        </article>
+        <article class="wf-step" data-reveal="2">
+          <div class="wf-num">03</div>
+          <h4>Deliver consistently</h4>
+          <p>Sessions, notes, and action items in one continuous flow so quality doesn't depend on anyone's memory.</p>
+        </article>
+        <article class="wf-step" data-reveal="3">
+          <div class="wf-num">04</div>
+          <h4>Renew with clarity</h4>
+          <p>Use engagement health signals, utilization data, and outcome reporting to guide renewal and growth decisions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section">
+    <div class="wrap">
+      <div class="cta-banner" data-reveal>
+        <div class="cta-banner-glow" aria-hidden="true"></div>
+        <div>
+          <h2>Ready to run your practice like a product?</h2>
+          <p>See SpikeForge configured for your coaching model in a focused 20-minute walkthrough.</p>
+        </div>
+        <div class="cta-banner-actions">
+          <a href="#" class="btn btn-md btn-fill-light">Request walkthrough</a>
+          <a href="#" class="btn btn-md btn-ghost">Start free trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="wrap footer-inner">
+      <span>&copy; 2026 SpikeForge. All rights reserved.</span>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    /* sticky nav background on scroll */
+    const nav = document.getElementById('siteNav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, {passive: true});
+    onScroll();
+
+    /* intersection-observer reveal */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+      }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+      document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>

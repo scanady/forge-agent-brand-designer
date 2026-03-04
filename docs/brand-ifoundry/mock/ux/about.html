@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — iFoundry Media</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --color-primary: #1D4ED8;
+            --color-primary-dark: #0F172A;
+            --color-accent: #EA580C;
+            --color-white: #FFFFFF;
+            --color-blue-50: #EFF6FF;
+            --color-blue-100: #DBEAFE;
+            --color-blue-200: #BFDBFE;
+            --color-blue-500: #3B82F6;
+            --color-blue-600: #2563EB;
+            --color-blue-700: #1D4ED8;
+            --color-blue-800: #1E40AF;
+            --color-blue-900: #1E3A8A;
+            --color-orange-50: #FFF7ED;
+            --color-orange-100: #FFEDD5;
+            --color-orange-600: #EA580C;
+            --color-orange-700: #C2410C;
+            --color-slate-50: #F8FAFC;
+            --color-slate-100: #F1F5F9;
+            --color-slate-200: #E2E8F0;
+            --color-slate-300: #CBD5E1;
+            --color-slate-400: #94A3B8;
+            --color-slate-500: #64748B;
+            --color-slate-600: #475569;
+            --color-slate-700: #334155;
+            --color-slate-800: #1E293B;
+            --color-slate-900: #0F172A;
+            --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.75rem; --text-4xl: 2.25rem;
+            --text-5xl: 3rem; --text-6xl: 4.5rem;
+            --font-light: 300; --font-regular: 400; --font-medium: 500; --font-semibold: 600; --font-bold: 700;
+            --leading-tight: 1.15; --leading-snug: 1.35; --leading-normal: 1.5;
+            --leading-relaxed: 1.6; --leading-loose: 1.7;
+            --tracking-tighter: -0.03em; --tracking-tight: -0.02em; --tracking-normal: 0;
+            --tracking-wide: 0.025em; --tracking-wider: 0.05em; --tracking-widest: 0.08em;
+            --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+            --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+            --space-16: 64px; --space-20: 80px; --space-24: 96px;
+            --border-1: 1px; --border-2: 2px;
+            --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-full: 9999px;
+            --border-default: #E2E8F0;
+            --shadow-color: 222 47% 11%;
+            --elevation-1: 0 1px 3px 0 hsl(var(--shadow-color) / 0.05), 0 1px 2px -1px hsl(var(--shadow-color) / 0.05);
+            --elevation-2: 0 2px 8px -1px hsl(var(--shadow-color) / 0.08), 0 1px 3px -1px hsl(var(--shadow-color) / 0.04);
+            --elevation-3: 0 4px 16px -2px hsl(var(--shadow-color) / 0.12), 0 2px 6px -2px hsl(var(--shadow-color) / 0.06);
+            --container-max: 1280px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans); font-size: var(--text-base); font-weight: var(--font-regular);
+            line-height: var(--leading-relaxed); color: var(--color-slate-700); background: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--color-primary); text-decoration: none; transition: color 0.15s ease; }
+        a:hover { color: var(--color-blue-800); }
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: var(--border-1) solid var(--border-default); height: 72px; display: flex; align-items: center; }
+        .nav .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-primary-dark); letter-spacing: var(--tracking-tight); }
+        .nav-logo-mark { width: 36px; height: 36px; }
+        .nav-logo-mark svg { width: 36px; height: 36px; }
+        .nav-links { display: flex; align-items: center; gap: var(--space-8); list-style: none; }
+        .nav-links a { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-600); letter-spacing: var(--tracking-wide); }
+        .nav-links a:hover { color: var(--color-primary); }
+        .nav-links a.active { color: var(--color-primary); }
+        .nav-cta { display: inline-flex; align-items: center; gap: var(--space-2); background: var(--color-accent); color: var(--color-white) !important; padding: 10px 20px; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: var(--font-semibold); transition: background 0.15s ease; }
+        .nav-cta:hover { background: var(--color-orange-700) !important; color: var(--color-white) !important; }
+
+        /* Page Hero */
+        .page-hero { padding-top: 144px; padding-bottom: var(--space-16); background: var(--color-slate-50); }
+        .page-hero-overline { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-accent); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: var(--space-4); }
+        .page-hero-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: var(--font-bold); color: var(--color-primary-dark); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-4); max-width: 700px; }
+        .page-hero-subtitle { font-size: var(--text-lg); color: var(--color-slate-500); max-width: 600px; line-height: var(--leading-loose); }
+
+        /* Section */
+        .section { padding: var(--space-24) 0; }
+        .section-light { background: var(--color-slate-50); }
+        .section-overline { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-accent); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: var(--space-4); }
+        .section-title { font-size: clamp(2rem, 3vw + 1rem, 3rem); font-weight: var(--font-bold); color: var(--color-primary-dark); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-4); }
+        .section-subtitle { font-size: var(--text-lg); color: var(--color-slate-500); max-width: 640px; line-height: var(--leading-loose); }
+
+        /* Story */
+        .story-content { max-width: 720px; }
+        .story-content p { font-size: var(--text-lg); line-height: var(--leading-loose); color: var(--color-slate-600); margin-bottom: var(--space-6); }
+        .story-content p:last-child { margin-bottom: 0; }
+        .story-highlight { font-size: var(--text-2xl); font-weight: var(--font-medium); color: var(--color-primary-dark); line-height: var(--leading-snug); border-left: var(--border-2) solid var(--color-accent); padding-left: var(--space-6); margin: var(--space-10) 0; }
+
+        /* Values */
+        .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
+        .value-card { background: var(--color-white); border: var(--border-1) solid var(--border-default); border-radius: var(--radius-xl); padding: var(--space-8); transition: box-shadow 0.2s ease; }
+        .value-card:hover { box-shadow: var(--elevation-2); }
+        .value-icon { width: 48px; height: 48px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); }
+        .value-icon-blue { background: var(--color-blue-50); color: var(--color-primary); }
+        .value-icon-orange { background: var(--color-orange-50); color: var(--color-accent); }
+        .value-card h3 { font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-primary-dark); margin-bottom: var(--space-2); }
+        .value-card p { font-size: var(--text-sm); color: var(--color-slate-500); line-height: var(--leading-loose); }
+
+        /* Partnership Model */
+        .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
+        .model-card { text-align: center; padding: var(--space-8); }
+        .model-card-number { font-size: var(--text-5xl); font-weight: var(--font-bold); color: var(--color-blue-100); margin-bottom: var(--space-4); }
+        .model-card h3 { font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-primary-dark); margin-bottom: var(--space-3); }
+        .model-card p { font-size: var(--text-sm); color: var(--color-slate-500); line-height: var(--leading-loose); }
+
+        /* Approach */
+        .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; margin-top: var(--space-12); }
+        .approach-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-6); }
+        .approach-item { display: flex; gap: var(--space-4); }
+        .approach-item-icon { flex-shrink: 0; width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-blue-50); color: var(--color-primary); display: flex; align-items: center; justify-content: center; }
+        .approach-item h4 { font-size: var(--text-base); font-weight: var(--font-semibold); color: var(--color-primary-dark); margin-bottom: var(--space-1); }
+        .approach-item p { font-size: var(--text-sm); color: var(--color-slate-500); line-height: var(--leading-loose); }
+        .approach-visual { background: linear-gradient(135deg, var(--color-blue-700) 0%, var(--color-primary-dark) 100%); border-radius: var(--radius-xl); height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-6); color: var(--color-white); padding: var(--space-8); }
+        .approach-visual-label { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-blue-200); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+        .approach-visual-stack { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; max-width: 280px; }
+        .approach-visual-item { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: var(--font-medium); display: flex; align-items: center; gap: var(--space-3); }
+        .approach-visual-item i { opacity: 0.6; }
+
+        /* CTA */
+        .cta-section { padding: var(--space-24) 0; background: linear-gradient(135deg, var(--color-blue-700) 0%, var(--color-primary-dark) 100%); text-align: center; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(234,88,12,0.15) 0%, transparent 70%); border-radius: 50%; }
+        .cta-section .container { position: relative; z-index: 1; }
+        .cta-title { font-size: clamp(2rem, 3vw + 1rem, 3rem); font-weight: var(--font-bold); color: var(--color-white); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-4); }
+        .cta-subtitle { font-size: var(--text-lg); color: var(--color-blue-200); max-width: 560px; margin: 0 auto var(--space-10); line-height: var(--leading-loose); }
+        .btn { display: inline-flex; align-items: center; gap: var(--space-2); padding: 12px 24px; border-radius: var(--radius-md); font-family: var(--font-sans); font-size: var(--text-base); font-weight: var(--font-semibold); cursor: pointer; border: none; transition: all 0.15s ease; }
+        .btn-lg { padding: 14px 32px; font-size: var(--text-lg); }
+        .btn-white { background: var(--color-white); color: var(--color-primary-dark); }
+        .btn-white:hover { background: var(--color-slate-100); color: var(--color-primary-dark); }
+        .btn-outline-white { background: transparent; color: var(--color-white); border: var(--border-2) solid rgba(255,255,255,0.3); }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.1); color: var(--color-white); }
+
+        /* Footer */
+        .footer { background: var(--color-primary-dark); color: var(--color-slate-400); padding: var(--space-16) 0 var(--space-8); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-12); margin-bottom: var(--space-12); }
+        .footer-brand-name { font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-white); margin-bottom: var(--space-3); }
+        .footer-brand-desc { font-size: var(--text-sm); color: var(--color-slate-400); line-height: var(--leading-loose); max-width: 320px; }
+        .footer-col-title { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-white); letter-spacing: var(--tracking-wide); margin-bottom: var(--space-4); }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+        .footer-links a { font-size: var(--text-sm); color: var(--color-slate-400); }
+        .footer-links a:hover { color: var(--color-white); }
+        .footer-bottom { border-top: var(--border-1) solid var(--color-slate-800); padding-top: var(--space-8); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { font-size: var(--text-xs); color: var(--color-slate-500); }
+        .footer-tagline { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-slate-500); font-style: italic; }
+
+        @media (max-width: 1024px) {
+            .values-grid { grid-template-columns: 1fr; }
+            .model-grid { grid-template-columns: 1fr; }
+            .approach-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .section { padding: var(--space-16) 0; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="nav-logo" aria-label="iFoundry Media home">
+                <span class="nav-logo-mark">
+                    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="6" r="4.5" stroke="#1D4ED8" stroke-width="3" fill="none"/>
+                        <circle cx="7" cy="16" r="3.5" stroke="#EA580C" stroke-width="2.5" fill="none"/>
+                        <circle cx="10" cy="26" r="4.5" stroke="#1D4ED8" stroke-width="3" fill="none"/>
+                        <line x1="15" y1="8" x2="22" y2="14" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="13" y1="17" x2="22" y2="17" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="14" y1="24" x2="22" y2="19" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="27" cy="9" r="3" fill="#EA580C"/>
+                        <rect x="23" y="12" width="7" height="22" rx="1" fill="#EA580C"/>
+                        <circle cx="26.5" cy="12" r="1.5" fill="#EA580C"/>
+                    </svg>
+                </span>
+                iFoundry
+            </a>
+            <ul class="nav-links">
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="nav-cta">Let's Talk <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <p class="page-hero-overline">About iFoundry</p>
+            <h1 class="page-hero-title">We build like we own it — because we do.</h1>
+            <p class="page-hero-subtitle">iFoundry Media is a technology foundry. We incubate, build, and scale digital products with the same commitment whether we co-own them or build alongside your team.</p>
+        </div>
+    </section>
+
+    <!-- Origin Story -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: var(--space-12);">
+                <p class="section-overline">Our Story</p>
+                <h2 class="section-title">Born from a builder's frustration.</h2>
+            </div>
+            <div class="story-content">
+                <p>iFoundry Media was founded on a simple conviction: the world doesn't need more code — it needs more products that actually work. Too many great ideas die in the gap between vision and execution, buried under mediocre development, misaligned incentives, and the fiction that software can be built by people who don't care about what it does.</p>
+
+                <div class="story-highlight">We chose to invest in the products we build, to co-own where it makes sense, and to treat every engagement like the outcome belongs to us.</div>
+
+                <p>iFoundry was built to be different. Not an agency. Not a consultancy. A foundry — a place where raw ideas are shaped by expert hands into real, working, valuable technology. That investment model changes everything: how we architect, how we hire, how we prioritize, and how hard we push to get it right.</p>
+
+                <p>Today, iFoundry incubates its own portfolio, partners with founders who need world-class engineering, and helps established companies modernize at speed. The thread connecting all of it is the same: we build things that matter, with people who care, using the best technology available.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="section section-light">
+        <div class="container">
+            <p class="section-overline">What Drives Us</p>
+            <h2 class="section-title">Built on five principles.</h2>
+            <p class="section-subtitle">These aren't aspirational statements — they're the standards every team member, every project, and every decision is measured against.</p>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon value-icon-blue">
+                        <i data-lucide="gem" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Craftsmanship</h3>
+                    <p>We don't ship features — we engineer products. Every line of code, every architecture decision, every user experience reflects a commitment to building things that last and perform.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon value-icon-orange">
+                        <i data-lucide="handshake" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Partnership</h3>
+                    <p>We build with our clients, not for them. Shared ownership, shared ambition, shared success. The best products come from teams that are genuinely invested in the outcome.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon value-icon-blue">
+                        <i data-lucide="zap" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Momentum</h3>
+                    <p>Ideas lose value sitting in backlogs. We move with urgency and precision — from concept to launch to scale — because speed with quality is a competitive advantage.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon value-icon-orange">
+                        <i data-lucide="target" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Impact</h3>
+                    <p>Technology is only as valuable as the change it creates. We measure success by client outcomes, market traction, and real-world value — not by hours logged or features shipped.</p>
+                </div>
+                <div class="value-card" style="grid-column: span 2;">
+                    <div class="value-icon value-icon-blue">
+                        <i data-lucide="sparkles" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We invest in the frontier — AI, modern architecture, data-driven design — not for novelty, but because the best solutions demand the best tools. We run toward new technology, not away from it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Model -->
+    <section class="section">
+        <div class="container">
+            <div style="text-align:center;">
+                <p class="section-overline">How We Work</p>
+                <h2 class="section-title">Three ways to build with us.</h2>
+                <p class="section-subtitle" style="margin:0 auto;">Whether you need a co-founder, a partner, or an engineering team — we adapt to how you work best.</p>
+            </div>
+
+            <div class="model-grid">
+                <div class="model-card">
+                    <div class="model-card-number">01</div>
+                    <h3>Incubation</h3>
+                    <p>We co-invest in promising ideas. We bring engineering, architecture, and launch capability — you bring the vision and domain expertise. Shared equity, shared outcomes.</p>
+                </div>
+                <div class="model-card">
+                    <div class="model-card-number">02</div>
+                    <h3>Product Partnership</h3>
+                    <p>We embed as your technology arm. From strategy through architecture through engineering — one team, fully aligned, building your product as if it were our own.</p>
+                </div>
+                <div class="model-card">
+                    <div class="model-card-number">03</div>
+                    <h3>Modernization</h3>
+                    <p>We transform legacy systems into modern, scalable platforms. Re-architect, migrate, and optimize — without disrupting what's already working for your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section class="section section-light">
+        <div class="container">
+            <p class="section-overline">Our Approach</p>
+            <h2 class="section-title">Engineering that earns trust.</h2>
+            <p class="section-subtitle">We combine proven methodology with modern tooling to deliver products that perform from day one.</p>
+
+            <div class="approach-grid">
+                <ul class="approach-list">
+                    <li class="approach-item">
+                        <div class="approach-item-icon">
+                            <i data-lucide="brain" style="width:20px;height:20px;"></i>
+                        </div>
+                        <div>
+                            <h4>AI-Driven Development</h4>
+                            <p>We use AI to accelerate architectural decisions, automate testing, and generate boilerplate — freeing engineers to focus on the problems that matter most.</p>
+                        </div>
+                    </li>
+                    <li class="approach-item">
+                        <div class="approach-item-icon">
+                            <i data-lucide="boxes" style="width:20px;height:20px;"></i>
+                        </div>
+                        <div>
+                            <h4>Proprietary Architecture</h4>
+                            <p>Proven patterns and frameworks we've refined across dozens of products. Not reinventing the wheel — standing on top of one that already works.</p>
+                        </div>
+                    </li>
+                    <li class="approach-item">
+                        <div class="approach-item-icon">
+                            <i data-lucide="iterations" style="width:20px;height:20px;"></i>
+                        </div>
+                        <div>
+                            <h4>Agile Execution</h4>
+                            <p>Two-week sprints, continuous delivery, and transparent progress. You see working software, not status reports.</p>
+                        </div>
+                    </li>
+                    <li class="approach-item">
+                        <div class="approach-item-icon">
+                            <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <div>
+                            <h4>Quality by Default</h4>
+                            <p>Automated testing, code review, security scanning, and performance monitoring are built into every sprint — not afterthoughts before launch.</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="approach-visual">
+                    <div class="approach-visual-label">Our Stack</div>
+                    <div class="approach-visual-stack">
+                        <div class="approach-visual-item">
+                            <i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i>
+                            Strategy &amp; Design
+                        </div>
+                        <div class="approach-visual-item">
+                            <i data-lucide="code-2" style="width:16px;height:16px;"></i>
+                            Full-Stack Engineering
+                        </div>
+                        <div class="approach-visual-item">
+                            <i data-lucide="brain" style="width:16px;height:16px;"></i>
+                            AI &amp; Data
+                        </div>
+                        <div class="approach-visual-item">
+                            <i data-lucide="cloud" style="width:16px;height:16px;"></i>
+                            Cloud Infrastructure
+                        </div>
+                        <div class="approach-visual-item">
+                            <i data-lucide="rocket" style="width:16px;height:16px;"></i>
+                            Launch &amp; Scale
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to build something real?</h2>
+            <p class="cta-subtitle">Tell us about your idea, your challenge, or the product that keeps you up at night. We'll tell you how we'd build it.</p>
+            <div style="display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap;">
+                <a href="contact.html" class="btn btn-white btn-lg">Start a Conversation <i data-lucide="arrow-right" style="width:20px;height:20px;"></i></a>
+                <a href="work.html" class="btn btn-outline-white btn-lg">See Our Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand-name">iFoundry Media</div>
+                    <p class="footer-brand-desc">A technology foundry that incubates, builds, and scales digital products. We build like we own it — because we do.</p>
+                </div>
+                <div>
+                    <div class="footer-col-title">Company</div>
+                    <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="blog.html">Blog</a></li></ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Connect</div>
+                    <ul class="footer-links"><li><a href="contact.html">Contact</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Legal</div>
+                    <ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copyright">&copy; 2026 iFoundry Media. All rights reserved.</span>
+                <span class="footer-tagline">Forged to perform.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
